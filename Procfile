@@ -1,1 +1,1 @@
-web: gunicorn deepcleaning.wsgi
+web: gunicorn deepclean.wsgi
