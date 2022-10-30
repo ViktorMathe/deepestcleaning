@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django_summernote',
     'cloudinary_storage',
     'django.contrib.staticfiles',
     'cloudinary',
@@ -139,3 +140,5 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CSRF_TRUSTED_ORIGINS=['https://*8000-viktormathe-deepestclea-pjdpzbn3m5d.ws-eu73.gitpod.io/admin/']
