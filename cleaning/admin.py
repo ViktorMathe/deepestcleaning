@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Reviews
+from .models import Reviews, BookingSystem
 from django_summernote.admin import SummernoteModelAdmin
 
 # Register your models here.
@@ -8,3 +8,8 @@ from django_summernote.admin import SummernoteModelAdmin
 @admin.register(Reviews)
 class ReviewAdmin(SummernoteModelAdmin):
     summernote_fields = ('content')
+
+
+@admin.register(BookingSystem)
+class BookingConfirmation(SummernoteModelAdmin):
+    summernote_fields = ('self')

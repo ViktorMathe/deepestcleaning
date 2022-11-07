@@ -6,6 +6,7 @@
 <div>
     {% for review in reviews %}
     <p>{{ review.title }}</p>
+    <p>{{ review.content }}</p>
     <p>{{ review.name }}</p>
     <p>{{ review.created }}</p>
     {% endfor %}
@@ -14,11 +15,22 @@
 {% if user.is_authenticated %}
 <h3>Add Review</h3>
 <div>
-<form method="POST">
-    {% csrf_token %}
-        {{ form | crispy }}
-    <button type="submit" value="POST">Submit</button>
-</form>
+    <form method="POST">
+        {% csrf_token %}
+        {{ review_form | crispy }}
+        <button type="submit" value="POST">Submit</button>
+    </form>
 </div>
-{%endif%}
+<div>
+    <h4>Edit/Delete Reviews</h4>
+    {% for review in reviews %}
+    {% if review.name == request.user %}
+    <p>{{ review.title }}</p>
+    <p>{{ review.content }}</p>
+    <p>{{ review.name }}</p>
+    <p>{{ review.created }}</p>
+</div>
+{% endif %}
+{% endfor %}
+{% endif %}
 {% endblock content %}

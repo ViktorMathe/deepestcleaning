@@ -3,8 +3,8 @@ from django.views import generic, View
 from django.views.generic.list import ListView
 from django.http import HttpResponseRedirect
 from django.core.exceptions import MultipleObjectsReturned
-from .models import Reviews
-from .forms import ReviewForm
+from .models import Reviews, BookingSystem
+from .forms import ReviewForm, BookingForm
 
 
 class HomePage(generic.TemplateView):
@@ -17,16 +17,14 @@ class Review(generic.FormView):
     template_name = "reviews.html"
 
     def get(self, request, *args, **kwargs):
-        queryset = Reviews.objects.filter(status=1).order_by("-created")
-        
-        self.reviews = queryset
+        self.reviews = Reviews.objects.filter(status=1).order_by("-created")
         self.form = self.get_form(self.form_class)
         context = {
             "reviews": self.reviews,
             "reviews_form": ReviewForm()
         }
         return generic.FormView.get(self, request, context)
-    
+
     def post(self, request, *args, **kwargs):
         queryset = Reviews.objects.filter(status=1)
         review = queryset
@@ -34,7 +32,7 @@ class Review(generic.FormView):
         context = {"review_form": review_form}
         if review_form.is_valid():
             review_form.instance.name = request.user
-        
+
             review_form.review = review
 
             review_form.save()
@@ -44,6 +42,36 @@ class Review(generic.FormView):
 
     def get_context_data(self, **kwargs):
         context = super(Review, self).get_context_data(**kwargs)
-        context['form'] = ReviewForm
+        context['review_form'] = ReviewForm
         context['reviews'] = self.reviews
+        return context
+
+
+class Booking(generic.FormView):
+    booking_form = BookingForm
+    form_class = BookingForm
+    template_name = "deepcleaning.html"
+
+    def get(self, request, *args, **kwargs):
+        self.booking_pending = BookingSystem.objects.filter(status=0)
+        self.booking_approved = BookingSystem.objects.filter(status=1)
+        self.form = self.get_form(self.form_class)
+        context = {"booking_form": self.form_class,
+                   "booking_pending": self.booking_pending}
+        return generic.FormView.get(self, request, context)
+
+    def post(self, request, *args, **kwargs):
+        booking_form = BookingForm(data=request.POST)
+        context = {"booking_form": booking_form}
+        if booking_form.is_valid():
+            booking_form.instance.name = request.user
+            booking_form.save()
+        else:
+            booking_form = BookingForm()
+        return HttpResponseRedirect(reverse("deepcleaning"))
+
+    def get_context_data(self, **kwargs):
+        context = super(Booking, self).get_context_data(**kwargs)
+        context['booking_form'] = BookingForm
+        context['booking_pending'] = self.booking_pending
         return context
