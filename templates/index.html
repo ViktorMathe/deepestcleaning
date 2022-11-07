@@ -1,5 +1,46 @@
 {% extends 'base.html' %}
 {% block content %}
+<h2>Home Page</h2>
+{% load crispy_forms_tags %}
+{% if user.is_authenticated %}
+<h3>Book a Cleaning Now!</h3>
+<form method="POST">
+    {% csrf_token %}
+    {{booking_form | crispy }}
+    <button type="submit" value="POST">Book Cleaning</button>
+</form>
 
+<div>
+    <h4>Pending Booking(s)</h4>
+    {% for booking in booking_pending %}
+    {% if booking.name == request.user %}
+    <p>{{ booking.name }}
+        is booked a
+        {{ booking.get_cleaning_type_display }}
+        on
+        {{ booking.cleaning_date }}
+        at
+        {{ booking.get_time_slot_display }}
+        waiting for approval.
+    </p>
+</div>
+{% endif %}
+{% endfor %}
+{% for booking in booking_approved %}
+{% if booking.name == request.user %}
+<div>
+    <h4>Approved Booking(s)</h4>
+    <p>{{ booking.name }}
+        is booked a
+        {{ booking.get_cleaning_type_display }}
+        on
+        {{ booking.cleaning_date }}
+        at
+        {{ booking.get_time_slot_display }}
+    </p>
+</div>
+{% endif %}
+{% endfor %}
+{% endif %}
 
 {% endblock content %}

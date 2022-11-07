@@ -14,9 +14,9 @@
     <nav>
         <a href="{% url 'home' %}">Home</a>
         <a href="{% url 'deepcleaning' %}">Deep Cleaning</a>
-        <a href="">General Cleaning</a>
+        <a href="{% url 'generalcleaning' %}">General Cleaning</a>
         <a href="{% url 'reviews' %}">Reviews</a>
-        <a href="">Contact Us</a>
+        <a href="{% url 'contactus' %}">Contact Us</a>
         {% if user.is_authenticated %}
         <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
         {% else %}

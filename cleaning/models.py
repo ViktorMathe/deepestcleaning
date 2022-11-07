@@ -2,7 +2,6 @@ from django.db import models
 from cloudinary.models import CloudinaryField
 from django.contrib.auth.models import User
 
-
 STATUS = ((0, 'Draft'), (1, 'Published'))
 APPROVED = ((0, 'Pending'), (1, 'Confirmed'))
 TYPES = ((0, 'Deep Cleaning'), (1, 'General Cleaning'))
@@ -39,10 +38,10 @@ class Reviews(models.Model):
 class BookingSystem(models.Model):
     name = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='booking_sys')
-    cleaning_type = models.IntegerField(choices=TYPES)
+    cleaning_type = models.IntegerField(choices=TYPES, blank=True)
     booked = models.DateTimeField(auto_now=True)
-    cleaning_date = models.DateField()
-    time_slot = models.IntegerField(choices=TIME_SLOTS)
+    cleaning_date = models.DateField(blank=True)
+    time_slot = models.IntegerField(choices=TIME_SLOTS, blank=True)
     status = models.IntegerField(choices=APPROVED, default=0)
     
     class Meta:
@@ -51,3 +50,9 @@ class BookingSystem(models.Model):
     def __str__(self):
         return f"""{self.name} booked a {self.get_cleaning_type_display()}
         to {self.cleaning_date} at {self.get_time_slot_display()}"""
+
+
+class Questionnaire(models.Model):
+    name = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='questions')
+    question = models.TextField(max_length=400, blank=True)

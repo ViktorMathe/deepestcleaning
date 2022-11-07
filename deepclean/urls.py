@@ -21,7 +21,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.HomePage.as_view(), name='home'),
     path('reviews/', views.Review.as_view(), name='reviews'),
-    path('deepcleaning/', views.Booking.as_view(), name='deepcleaning'),
+    path('deepcleaning/', views.DeepClean.as_view(), name='deepcleaning'),
+    path('generalcleaning/', views.GeneralClean.as_view(),
+        name='generalcleaning'),
+    path('contactus/', views.ContactUs.as_view(), name='contactus'),
     path('summernote/', include('django_summernote.urls')),
     path('accounts/', include('allauth.urls')),
 ]
