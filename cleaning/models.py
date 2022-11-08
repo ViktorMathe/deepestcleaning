@@ -3,6 +3,7 @@ from cloudinary.models import CloudinaryField
 from django.contrib.auth.models import User
 
 STATUS = ((0, 'Draft'), (1, 'Published'))
+ANSWERED = ((0, 'Not answered'), (1, 'Answered'))
 APPROVED = ((0, 'Pending'), (1, 'Confirmed'))
 TYPES = ((0, 'Deep Cleaning'), (1, 'General Cleaning'))
 TIME_SLOTS = (
@@ -56,3 +57,8 @@ class Questionnaire(models.Model):
     name = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='questions')
     question = models.TextField(max_length=400, blank=True)
+    asked_at = models.DateTimeField(auto_now=True)
+    status = models.IntegerField(choices=ANSWERED, default=0)
+
+    def __str__(self):
+        return f"{self.name} asked a question at {self.asked_at}"

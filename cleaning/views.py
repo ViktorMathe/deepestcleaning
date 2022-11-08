@@ -19,7 +19,7 @@ class HomePage(FormView):
         context = {"booking_form": self.form_class,
                    "booking_pending": self.booking_pending,
                    "booking_approved": self.booking_approved}
-        return generic.FormView.get(self, request, context)
+        return FormView.get(self, request, context)
 
     def post(self, request, *args, **kwargs):
         booking_form = BookingForm(data=request.POST)
@@ -51,7 +51,7 @@ class Review(FormView):
             "reviews": self.reviews,
             "reviews_form": ReviewForm()
         }
-        return generic.FormView.get(self, request, context)
+        return FormView.get(self, request, context)
 
     def post(self, request, *args, **kwargs):
         queryset = Reviews.objects.filter(status=1)
@@ -60,9 +60,7 @@ class Review(FormView):
         context = {"review_form": review_form}
         if review_form.is_valid():
             review_form.instance.name = request.user
-
             review_form.review = review
-
             review_form.save()
         else:
             review_form = ReviewForm()
@@ -86,3 +84,30 @@ class GeneralClean(TemplateView):
 class ContactUs(FormView):
     form_class = QuestionForm
     template_name = "contactus.html"
+
+    def get(self, request, *args, **kwargs):
+        self.questions = Questionnaire.objects.filter(status=0)
+        self.question_form = self.get_form(self.form_class)
+        context = {
+            'questions': self.questions,
+            'question_form': self.form_class
+        }
+        return FormView.get(self, request, context)
+
+    def post(self, request, *args, **kwargs):
+        questions = Questionnaire.objects.filter(status=0)
+        question_form = QuestionForm(data=request.POST)
+        context = {"question_form": question_form}
+        if question_form.is_valid():
+            question_form.instance.name = request.user
+            question_form.questions = questions
+            question_form.save()
+        else:
+            question_form = QuestionForm()
+        return HttpResponseRedirect(reverse("contactus"))
+
+    def get_context_data(self, **kwargs):
+        context = super(ContactUs, self).get_context_data(**kwargs)
+        context['question_form'] = QuestionForm
+        context['questions'] = self.questions
+        return context

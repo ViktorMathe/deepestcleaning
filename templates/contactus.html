@@ -1,4 +1,17 @@
 {% extends 'base.html' %}
 {% block content %}
 <h2>Contact Us</h2>
+<h4>Questions:</h4>
+{% for question in questions %}
+<p>{{ question.question }}</p>
+Asked by:
+{{ question.name }}
+{% endfor %}
+<h4>If you have any questions:</h4>
+<h5>Do not hasitate to ask!</h5>
+<form method="POST">
+    {% csrf_token %}
+    {{ question_form }}
+    <button type="submit" value="POST">Ask</button>
+</form>
 {% endblock content %}
