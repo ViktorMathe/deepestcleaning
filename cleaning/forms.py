@@ -1,5 +1,9 @@
-from .models import Reviews, BookingSystem, Questionnaire
+from .models import Reviews, BookingSystem
 from django import forms
+
+
+class DateInput(forms.DateInput):
+    input_type = "date"
 
 
 class ReviewForm(forms.ModelForm):
@@ -12,9 +16,6 @@ class BookingForm(forms.ModelForm):
     class Meta:
         model = BookingSystem
         fields = ['cleaning_type', 'cleaning_date', 'time_slot']
-
-
-class QuestionForm(forms.ModelForm):
-    class Meta:
-        model = Questionnaire
-        fields = ['question']
+        widgets = {
+            "cleaning_date": DateInput()
+        }

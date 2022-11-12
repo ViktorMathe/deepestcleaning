@@ -2,35 +2,71 @@
 {% block content %}
 {% load crispy_forms_tags %}
 
-<h3>Reviews</h3>
-<div>
+<div class="container-fluid text-center">
+    <h3>Reviews</h3>
     {% for review in reviews %}
     <p>{{ review.title }}</p>
     <p>{{ review.content }}</p>
     <p>{{ review.name }}</p>
-    <p>{{ review.created }}</p>
+    <p>{{ review.updated }}</p>
     {% endfor %}
 </div>
-
-{% if user.is_authenticated %}
-<h3>Add Review</h3>
-<div>
-    <form method="POST">
-        {% csrf_token %}
-        {{ review_form | crispy }}
-        <button type="submit" value="POST">Submit</button>
-    </form>
+<div class="container text-center">
+    {% if user.is_authenticated %}
+    <button class="btn btn-info" type="button" data-bs-toggle="collapse" data-bs-target="#add_review"
+        aria-expanded="false" aria-controls="add_review">Add Review</button>
+    <div class="collapse" id="add_review">
+        <form method="POST">
+            {% csrf_token %}
+            {{ review_form | crispy }}
+            <button type="submit" value="POST">Submit</button>
+        </form>
+    </div>
+    <div>
+        <button class="btn btn-warning" type="button" data-bs-toggle="collapse" data-bs-target="#update_review"
+            aria-expanded="false" aria-controls="update_review">Edit/Delete Reviews</button>
+        <div class="row collapse" id="update_review">
+            {% for review in reviews %}
+            {% if review.name == request.user %}
+            <div class="col-sm-2 col-md-4">
+                <div class="card">
+                    <div class="card-content">
+                        <p>{{ review.title }}</p>
+                        <p>{{ review.content }}</p>
+                        <p>{{ review.name }}</p>
+                        <p>{{ review.updated }}</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="{% url 'edit' review.id %}" class="btn btn-warning">Edit</a>
+                        <a href="" class="btn btn-danger" data-bs-toggle="modal"
+                            data-bs-target="#edit_review_modal{{ review.id }}">Delete</a>
+                    </div>
+                    <div class="modal fade" id="edit_review_modal{{ review.id }}" tabindex="-1" aria-labelledby="edit_review_modal_label"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="edit_review_modal">{{ review.title }}</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body" id="edit_review_modal">
+                                    {{ review.content }}
+                                </div>
+                                <div class="modal-footer">
+                                    <button  type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-danger">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
 </div>
-<div>
-    <h4>Edit/Delete Reviews</h4>
-    {% for review in reviews %}
-    {% if review.name == request.user %}
-    <p>{{ review.title }}</p>
-    <p>{{ review.content }}</p>
-    <p>{{ review.name }}</p>
-    <p>{{ review.created }}</p>
-</div>
-{% endif %}
-{% endfor %}
-{% endif %}
 {% endblock content %}

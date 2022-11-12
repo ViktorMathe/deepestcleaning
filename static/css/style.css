@@ -1,3 +1,11 @@
 h1{
     color: slategray;
+    text-align: center;
+}
+h2{
+    text-align: center;
+}
+
+li{
+    list-style-type: none;
 }

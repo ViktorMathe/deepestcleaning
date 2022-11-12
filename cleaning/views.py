@@ -1,10 +1,11 @@
 from django.shortcuts import render, reverse, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from django.views import generic, View
 from django.views.generic import FormView, TemplateView
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponseForbidden
 from django.core.exceptions import MultipleObjectsReturned
-from .models import Reviews, BookingSystem, Questionnaire
-from .forms import ReviewForm, BookingForm, QuestionForm
+from .models import Reviews, BookingSystem
+from .forms import ReviewForm, BookingForm
 
 
 class HomePage(FormView):
@@ -29,7 +30,7 @@ class HomePage(FormView):
             booking_form.save()
         else:
             booking_form = BookingForm()
-        return HttpResponseRedirect(reverse("deepcleaning"))
+        return HttpResponseRedirect(reverse("home"))
 
     def get_context_data(self, **kwargs):
         context = super(HomePage, self).get_context_data(**kwargs)
@@ -39,8 +40,33 @@ class HomePage(FormView):
         return context
 
 
+class EditBooking(View):
+    def get(self, request, booking_id):
+        booking = get_object_or_404(BookingSystem, id=booking_id)
+        booking_form = BookingForm(instance=booking)
+        context = {'booking': booking, 'booking_form': booking_form}
+        return render(request, 'edit_booking.html', context)
+
+    def post(self, request, booking_id):
+        booking = get_object_or_404(BookingSystem, id=booking_id)
+        booking_form = BookingForm(request.POST, instance=booking)
+        if booking_form.is_valid():
+            booking_form.instance.name = request.user
+            booking_form.save()
+        context = {'booking': booking, 'booking_form': booking_form}
+        return HttpResponseRedirect(reverse('home'), context)
+
+
+def cancel_booking(request, booking_id):
+    cancel_booking = BookingSystem.objects.filter(id=booking_id)
+    cancel_booking.delete()
+    context = { 
+        'cancel_booking': cancel_booking,
+    }
+    return render(request, 'index.html', context)
+
+
 class Review(FormView):
-    review_form = ReviewForm
     form_class = ReviewForm
     template_name = "reviews.html"
 
@@ -53,6 +79,7 @@ class Review(FormView):
         }
         return FormView.get(self, request, context)
 
+    @login_required
     def post(self, request, *args, **kwargs):
         queryset = Reviews.objects.filter(status=1)
         review = queryset
@@ -60,7 +87,6 @@ class Review(FormView):
         context = {"review_form": review_form}
         if review_form.is_valid():
             review_form.instance.name = request.user
-            review_form.review = review
             review_form.save()
         else:
             review_form = ReviewForm()
@@ -68,9 +94,30 @@ class Review(FormView):
 
     def get_context_data(self, **kwargs):
         context = super(Review, self).get_context_data(**kwargs)
-        context['review_form'] = ReviewForm
+        context['review_form'] = ReviewForm()
         context['reviews'] = self.reviews
         return context
+
+
+class EditReview(View):
+
+    def get(self, request, review_id):
+        edit = get_object_or_404(Reviews, id=review_id)
+        edit_form = ReviewForm(instance=edit)
+        context = {
+                'edit': edit,
+                'edit_form': edit_form
+                }
+        return render(request, 'edit_review.html', context)
+
+    def post(self, request, review_id):
+        edit = get_object_or_404(Reviews, id=review_id)
+        edit_form = ReviewForm(request.POST, instance=edit)
+        if edit_form.is_valid():
+            edit_form.instance.name = request.user
+            edit_form.save()
+        context = {'edit_form': edit_form}
+        return HttpResponseRedirect(reverse('reviews'), context)
 
 
 class DeepClean(TemplateView):
@@ -81,33 +128,5 @@ class GeneralClean(TemplateView):
     template_name = 'generalcleaning.html'
 
 
-class ContactUs(FormView):
-    form_class = QuestionForm
+class ContactUs(TemplateView):
     template_name = "contactus.html"
-
-    def get(self, request, *args, **kwargs):
-        self.questions = Questionnaire.objects.filter(status=0)
-        self.question_form = self.get_form(self.form_class)
-        context = {
-            'questions': self.questions,
-            'question_form': self.form_class
-        }
-        return FormView.get(self, request, context)
-
-    def post(self, request, *args, **kwargs):
-        questions = Questionnaire.objects.filter(status=0)
-        question_form = QuestionForm(data=request.POST)
-        context = {"question_form": question_form}
-        if question_form.is_valid():
-            question_form.instance.name = request.user
-            question_form.questions = questions
-            question_form.save()
-        else:
-            question_form = QuestionForm()
-        return HttpResponseRedirect(reverse("contactus"))
-
-    def get_context_data(self, **kwargs):
-        context = super(ContactUs, self).get_context_data(**kwargs)
-        context['question_form'] = QuestionForm
-        context['questions'] = self.questions
-        return context

@@ -3,7 +3,6 @@ from cloudinary.models import CloudinaryField
 from django.contrib.auth.models import User
 
 STATUS = ((0, 'Draft'), (1, 'Published'))
-ANSWERED = ((0, 'Not answered'), (1, 'Answered'))
 APPROVED = ((0, 'Pending'), (1, 'Confirmed'))
 TYPES = ((0, 'Deep Cleaning'), (1, 'General Cleaning'))
 TIME_SLOTS = (
@@ -23,9 +22,10 @@ class Reviews(models.Model):
     name = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='review_post')
     created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
     content = models.TextField()
     excerpt = models.TextField(blank=True)
-    image = CloudinaryField('image', default='placeholder')
+    image = CloudinaryField('image', blank=True, default=' ')
     status = models.IntegerField(choices=STATUS, default=1)
     approved = models.BooleanField(default=True)
 
@@ -39,26 +39,15 @@ class Reviews(models.Model):
 class BookingSystem(models.Model):
     name = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='booking_sys')
-    cleaning_type = models.IntegerField(choices=TYPES, blank=True)
+    cleaning_type = models.IntegerField(choices=TYPES)
     booked = models.DateTimeField(auto_now=True)
-    cleaning_date = models.DateField(blank=True)
-    time_slot = models.IntegerField(choices=TIME_SLOTS, blank=True)
+    cleaning_date = models.DateField()
+    time_slot = models.IntegerField(choices=TIME_SLOTS)
     status = models.IntegerField(choices=APPROVED, default=0)
-    
+
     class Meta:
         ordering = ['-booked']
 
     def __str__(self):
         return f"""{self.name} booked a {self.get_cleaning_type_display()}
         to {self.cleaning_date} at {self.get_time_slot_display()}"""
-
-
-class Questionnaire(models.Model):
-    name = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='questions')
-    question = models.TextField(max_length=400, blank=True)
-    asked_at = models.DateTimeField(auto_now=True)
-    status = models.IntegerField(choices=ANSWERED, default=0)
-
-    def __str__(self):
-        return f"{self.name} asked a question at {self.asked_at}"

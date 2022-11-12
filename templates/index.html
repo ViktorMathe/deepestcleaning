@@ -1,46 +1,75 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>Home Page</h2>
 {% load crispy_forms_tags %}
 {% if user.is_authenticated %}
-<h3>Book a Cleaning Now!</h3>
-<form method="POST">
-    {% csrf_token %}
-    {{booking_form | crispy }}
-    <button type="submit" value="POST">Book Cleaning</button>
-</form>
 
-<div>
-    <h4>Pending Booking(s)</h4>
-    {% for booking in booking_pending %}
-    {% if booking.name == request.user %}
-    <p>{{ booking.name }}
-        is booked a
-        {{ booking.get_cleaning_type_display }}
-        on
-        {{ booking.cleaning_date }}
-        at
-        {{ booking.get_time_slot_display }}
-        waiting for approval.
-    </p>
+<h2>Home Page</h2>
+
+<div class="container text-center col-md-auto">
+    <h3>Book a Cleaning Now!</h3>
+    <form method="POST">
+        {% csrf_token %}
+        {{ booking_form | crispy }}
+        <button type="submit" value="POST">Book Cleaning</button>
+    </form>
 </div>
-{% endif %}
-{% endfor %}
-{% for booking in booking_approved %}
-{% if booking.name == request.user %}
-<div>
-    <h4>Approved Booking(s)</h4>
-    <p>{{ booking.name }}
-        is booked a
-        {{ booking.get_cleaning_type_display }}
-        on
-        {{ booking.cleaning_date }}
-        at
-        {{ booking.get_time_slot_display }}
-    </p>
+<div class="container text-center">
+    <button class="btn btn-warning" type="button" data-bs-toggle="collapse" data-bs-target="#pending_bookings"
+        aria-expanded="true" aria-controls="pending_bookings">Pending Booking(s)</button>
+    <div class="row collapse" id="pending_bookings" style="min-height: 20px;">
+        {% for booking in booking_pending %}
+        {% if booking.name == request.user %}
+        <div class="col-sm-6 col-md-4">
+            <div class="card" style="width: 400px;">
+                <div class="card-content">
+                    {{ booking.name }}
+                    is booked a
+                    {{ booking.get_cleaning_type_display }}
+                    on
+                    {{ booking.cleaning_date }}
+                    at
+                    {{ booking.get_time_slot_display }}
+                    waiting for approval.
+                </div>
+                <div class="card-action">
+                    <a href="{% url 'edit_booking' booking.id %}" class="btn btn-warning">Edit</a>
+                    <a href="/cancel_booking/{{ booking.id }}" class="btn btn-danger">Cancel</a>
+
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
 </div>
-{% endif %}
-{% endfor %}
+
+<div class="container text-center">
+    <button class="btn btn-success" type="button" data-bs-toggle="collapse" data-bs-target="#approved_bookings"
+        aria-expanded="false" aria-controls="approved_bookings">Approved Booking(s)</button>
+    <div class="row collapse " id="approved_bookings" style="min-height: 20px;">
+        {% for booking in booking_approved %}
+        {% if booking.name == request.user %}
+        <div class="col-sm-2 col-md-4">
+            <div class="card" style="width: 400px">
+                <div class="card-content">
+                    {{ booking.name }}
+                    is booked a
+                    {{ booking.get_cleaning_type_display }}
+                    on
+                    {{ booking.cleaning_date }}
+                    at
+                    {{ booking.get_time_slot_display }}
+                </div>
+                <div class="card-action">
+                    <a href="" class="btn btn-danger">Cancel Booking</a>
+
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
 {% endif %}
 
 {% endblock content %}

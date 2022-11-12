@@ -1,12 +1,18 @@
 {% extends 'base.html' %}
 {% block content %}
 <h2>Contact Us</h2>
-<h4>Questions:</h4>
-{% for question in questions %}
-<p>{{ question.question }}</p>
-Asked by:
-{{ question.name }}
-{% endfor %}
+<div class="container-fluid">
+    <h4>Questions:</h4>
+    <div class="card" style="width: 400px;">
+        <div class="card-content">
+            {% for question in questions %}
+            <p>{{ question.question }}</p>
+            Asked by:
+            {{ question.name }}
+        </div>
+    </div>
+    {% endfor %}
+</div>
 <h4>If you have any questions:</h4>
 <h5>Do not hasitate to ask!</h5>
 <form method="POST">
