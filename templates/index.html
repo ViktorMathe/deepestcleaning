@@ -8,8 +8,8 @@
 <div class="container text-center col-md-auto">
     <h3>Book a Cleaning Now!</h3>
     <form method="POST">
-        {% csrf_token %}
-        {{ booking_form | crispy }}
+            {% csrf_token %}
+            {{ form }}
         <button type="submit" value="POST">Book Cleaning</button>
     </form>
 </div>

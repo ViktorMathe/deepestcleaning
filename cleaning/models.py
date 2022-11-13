@@ -1,6 +1,8 @@
 from django.db import models
 from cloudinary.models import CloudinaryField
 from django.contrib.auth.models import User
+from django.core.validators import MinValueValidator
+import datetime
 
 STATUS = ((0, 'Draft'), (1, 'Published'))
 APPROVED = ((0, 'Pending'), (1, 'Confirmed'))
@@ -37,11 +39,14 @@ class Reviews(models.Model):
 
 
 class BookingSystem(models.Model):
+
     name = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='booking_sys')
     cleaning_type = models.IntegerField(choices=TYPES)
     booked = models.DateTimeField(auto_now=True)
-    cleaning_date = models.DateField()
+    cleaning_date = models.DateField(
+        validators=[MinValueValidator(
+            datetime.date.today, "Time cannot be in the Past")])
     time_slot = models.IntegerField(choices=TIME_SLOTS)
     status = models.IntegerField(choices=APPROVED, default=0)
 

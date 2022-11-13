@@ -2,13 +2,15 @@ from django.shortcuts import render, reverse, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.views import generic, View
 from django.views.generic import FormView, TemplateView
-from django.http import HttpResponseRedirect, HttpResponseForbidden
+from django.http import HttpResponseRedirect, HttpResponse
+from django.core.exceptions import ValidationError
 from .models import Reviews, BookingSystem
 from .forms import ReviewForm, BookingForm
+import datetime
 
 
 class HomePage(FormView):
-    booking_form = BookingForm
+    booking_form = BookingForm()
     form_class = BookingForm
     template_name = "index.html"
 
@@ -16,8 +18,7 @@ class HomePage(FormView):
         self.booking_pending = BookingSystem.objects.filter(status=0)
         self.booking_approved = BookingSystem.objects.filter(status=1)
         self.form = self.get_form(self.form_class)
-        context = {"booking_form": self.form_class,
-                   "booking_pending": self.booking_pending,
+        context = {"booking_pending": self.booking_pending,
                    "booking_approved": self.booking_approved}
         return FormView.get(self, request, context)
 
@@ -27,19 +28,20 @@ class HomePage(FormView):
         if booking_form.is_valid():
             booking_form.instance.name = request.user
             booking_form.save()
+            return HttpResponseRedirect(reverse("home"))
         else:
-            booking_form = BookingForm()
-        return HttpResponseRedirect(reverse("home"))
+            return render(request, 'index.html', {'form': booking_form})
 
     def get_context_data(self, **kwargs):
         context = super(HomePage, self).get_context_data(**kwargs)
-        context['booking_form'] = BookingForm
+        context['booking_form'] = BookingForm()
         context['booking_pending'] = self.booking_pending
         context['booking_approved'] = self.booking_approved
         return context
 
 
 class EditBooking(View):
+
     def get(self, request, booking_id):
         booking = get_object_or_404(BookingSystem, id=booking_id)
         booking_form = BookingForm(instance=booking)
@@ -56,6 +58,7 @@ class EditBooking(View):
         return HttpResponseRedirect(reverse('home'), context)
 
 
+@login_required
 def cancel_booking(request, booking_id):
     cancel_booking = BookingSystem.objects.filter(id=booking_id)
     cancel_booking.delete()
@@ -75,7 +78,6 @@ class Review(FormView):
         }
         return FormView.get(self, request, context)
 
-    @login_required
     def post(self, request, *args, **kwargs):
         queryset = Reviews.objects.filter(status=1)
         review = queryset
@@ -116,6 +118,7 @@ class EditReview(View):
         return HttpResponseRedirect(reverse('reviews'), context)
 
 
+@login_required
 def delete_review(request, review_id):
     delete_review = Reviews.objects.filter(id=review_id)
     delete_review.delete()
