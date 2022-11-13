@@ -27,6 +27,8 @@ urlpatterns = [
     path('reviews/', views.Review.as_view(), name='reviews'),
     path('edit_review/<int:review_id>', views.EditReview.as_view(),
          name='edit'),
+    path('delete_review/<int:review_id>', views.delete_review,
+         name='delete_review'),
     path('deepcleaning/', views.DeepClean.as_view(), name='deepcleaning'),
     path('generalcleaning/', views.GeneralClean.as_view(),
          name='generalcleaning'),

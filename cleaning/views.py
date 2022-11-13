@@ -1,9 +1,8 @@
-from django.shortcuts import render, reverse, get_object_or_404
+from django.shortcuts import render, reverse, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.views import generic, View
 from django.views.generic import FormView, TemplateView
 from django.http import HttpResponseRedirect, HttpResponseForbidden
-from django.core.exceptions import MultipleObjectsReturned
 from .models import Reviews, BookingSystem
 from .forms import ReviewForm, BookingForm
 
@@ -60,10 +59,7 @@ class EditBooking(View):
 def cancel_booking(request, booking_id):
     cancel_booking = BookingSystem.objects.filter(id=booking_id)
     cancel_booking.delete()
-    context = { 
-        'cancel_booking': cancel_booking,
-    }
-    return render(request, 'index.html', context)
+    return redirect('home')
 
 
 class Review(FormView):
@@ -118,6 +114,12 @@ class EditReview(View):
             edit_form.save()
         context = {'edit_form': edit_form}
         return HttpResponseRedirect(reverse('reviews'), context)
+
+
+def delete_review(request, review_id):
+    delete_review = Reviews.objects.filter(id=review_id)
+    delete_review.delete()
+    return redirect('reviews')
 
 
 class DeepClean(TemplateView):
