@@ -6,6 +6,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core.exceptions import ValidationError
 from .models import Reviews, BookingSystem
 from .forms import ReviewForm, BookingForm
+from cloudinary.forms import cl_init_js_callbacks
 import datetime
 
 
@@ -81,7 +82,7 @@ class Review(FormView):
     def post(self, request, *args, **kwargs):
         queryset = Reviews.objects.filter(status=1)
         review = queryset
-        review_form = ReviewForm(data=request.POST)
+        review_form = ReviewForm(request.POST, request.FILES)
         context = {"review_form": review_form}
         if review_form.is_valid():
             review_form.instance.name = request.user
@@ -110,7 +111,7 @@ class EditReview(View):
 
     def post(self, request, review_id):
         edit = get_object_or_404(Reviews, id=review_id)
-        edit_form = ReviewForm(request.POST, instance=edit)
+        edit_form = ReviewForm(request.POST, request.FILES, instance=edit)
         if edit_form.is_valid():
             edit_form.instance.name = request.user
             edit_form.save()

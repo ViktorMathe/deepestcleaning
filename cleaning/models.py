@@ -27,7 +27,7 @@ class Reviews(models.Model):
     updated = models.DateTimeField(auto_now=True)
     content = models.TextField()
     excerpt = models.TextField(blank=True)
-    image = CloudinaryField('image', blank=True, default=' ')
+    image = CloudinaryField('images', blank=True)
     status = models.IntegerField(choices=STATUS, default=1)
     approved = models.BooleanField(default=True)
 
@@ -46,7 +46,7 @@ class BookingSystem(models.Model):
     booked = models.DateTimeField(auto_now=True)
     cleaning_date = models.DateField(
         validators=[MinValueValidator(
-            datetime.date.today, "Time cannot be in the Past")])
+            datetime.date.today, "Booking cannot be in the Past")])
     time_slot = models.IntegerField(choices=TIME_SLOTS)
     status = models.IntegerField(choices=APPROVED, default=0)
 
