@@ -46,7 +46,8 @@ class BookingSystem(models.Model):
     booked = models.DateTimeField(auto_now=True)
     cleaning_date = models.DateField(
         validators=[MinValueValidator(
-            datetime.date.today, "Booking cannot be in the Past")])
+            datetime.date.today()+datetime.timedelta(days=1),
+            "Booking cannot be in the Past, or the Same Day!")])
     time_slot = models.IntegerField(choices=TIME_SLOTS)
     status = models.IntegerField(choices=APPROVED, default=0)
 
