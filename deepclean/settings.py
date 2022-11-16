@@ -53,7 +53,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cloudinary',
     'cleaning',
-    'pillow'
 ]
 
 STIE_ID = 1
