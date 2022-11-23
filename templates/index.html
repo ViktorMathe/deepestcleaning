@@ -15,11 +15,12 @@
 </div>
 <br>
 <div class="container text-center col-md-auto">
-    <h4>Book a Cleaning Now!</h4>
-
-    <span id="message">(First you have to register/log in!)</span>
-
+    <h4>If you would like to Book a cleaning you have to 
+        <a class="btn btn-info text-center" href="{% url 'account_signup' %}">Register</a>
+        or if you already have an accout just <a class="btn btn-info text-center" href="{% url 'account_login' %}">Sign In!</a>
+    </h4>
     {% if user.is_authenticated %}
+    <h4>Book a Cleaning Now!</h4>
     <form method="POST">
         {% csrf_token %}
         {{ form | crispy }}
