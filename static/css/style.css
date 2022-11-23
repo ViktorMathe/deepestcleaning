@@ -62,3 +62,8 @@ li{
     background-color: rgba(233, 239, 242, 0.2);
     border-radius: 15px;
 }
+
+div#map {
+    position: relative;
+    min-height: 260px;
+}

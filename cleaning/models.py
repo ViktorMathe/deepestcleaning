@@ -5,7 +5,7 @@ from django.core.validators import MinValueValidator
 import datetime
 
 STATUS = ((0, 'Draft'), (1, 'Published'))
-APPROVED = ((0, 'Pending'), (1, 'Confirmed'))
+APPROVED = ((0, 'Pending'), (1, 'Approved'))
 TYPES = ((0, 'Deep Cleaning'), (1, 'General Cleaning'))
 TIME_SLOTS = (
         (0, '09:00 – 09:30'),
@@ -49,7 +49,7 @@ class BookingSystem(models.Model):
             datetime.date.today()+datetime.timedelta(days=1),
             "Booking cannot be in the Past, or the Same Day!")])
     time_slot = models.IntegerField(choices=TIME_SLOTS)
-    status = models.IntegerField(choices=APPROVED, default=0)
+    status = models.BooleanField(choices=APPROVED, default=0)
 
     class Meta:
         ordering = ['-booked']

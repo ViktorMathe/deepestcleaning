@@ -22,6 +22,8 @@ urlpatterns = [
     path('', views.HomePage.as_view(), name='home'),
     path('edit_booking/<int:booking_id>', views.EditBooking.as_view(),
          name='edit_booking'),
+    path('approve_booking/<int:booking_id>', views.approve_booking,
+         name='approve_booking'),
     path('cancel_booking/<int:booking_id>', views.cancel_booking,
          name='cancel_booking'),
     path('reviews/', views.Review.as_view(), name='reviews'),

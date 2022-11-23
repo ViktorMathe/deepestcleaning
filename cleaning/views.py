@@ -46,17 +46,32 @@ class EditBooking(View):
     def get(self, request, booking_id):
         booking = get_object_or_404(BookingSystem, id=booking_id)
         booking_form = BookingForm(instance=booking)
-        context = {'booking': booking, 'booking_form': booking_form}
+        context = {
+            'booking': booking,
+            'booking_form': booking_form,
+            }
         return render(request, 'edit_booking.html', context)
 
     def post(self, request, booking_id):
         booking = get_object_or_404(BookingSystem, id=booking_id)
         booking_form = BookingForm(request.POST, instance=booking)
+        status = booking.status
         if booking_form.is_valid():
             booking_form.instance.name = request.user
             booking_form.save()
-        context = {'booking': booking, 'booking_form': booking_form}
+        context = {
+            'booking': booking,
+            'booking_form': booking_form,
+            'status': status
+            }
         return HttpResponseRedirect(reverse('home'), context)
+
+
+def approve_booking(request, booking_id):
+    approve_booking = get_object_or_404(BookingSystem, id=booking_id)
+    approve_booking.status = not approve_booking.status
+    approve_booking.save()
+    return HttpResponseRedirect(reverse('home'))
 
 
 @login_required
