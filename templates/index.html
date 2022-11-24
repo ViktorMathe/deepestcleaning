@@ -24,17 +24,19 @@
     <form method="POST">
         {% csrf_token %}
         {{ form | crispy }}
-        <button type="submit" value="POST">Book Cleaning</button>
+        <br>
+        <button class="btn btn-primary" type="submit" value="POST">Book Cleaning</button>
     </form>
 </div>
+<br>
 <div class="container text-center">
     <button class="btn btn-warning" type="button" data-bs-toggle="collapse" data-bs-target="#pending_bookings"
         aria-expanded="true" aria-controls="pending_bookings">Pending Booking(s)</button>
-    <div class="row collapse" id="pending_bookings" style="min-height: 20px;">
+    <div class="row collapse me-3" id="pending_bookings" style="min-height: 20px;">
         {% for booking in booking_pending %}
         {% if booking.name == request.user or request.user|has_group:"Staff" %}
-        <div class="col-sm-6 col-md-4">
-            <div class="card" style="width: 400px;">
+        <div class="col-md-4 col-lg-6">
+            <div class="card mb-3 border-warning">
                 <div class="card-content">
                     {{ booking.name }}
                     is booked a
@@ -108,15 +110,15 @@
         {% endfor %}
     </div>
 </div>
-
+<br>
 <div class="container text-center">
     <button class="btn btn-success" type="button" data-bs-toggle="collapse" data-bs-target="#approved_bookings"
         aria-expanded="false" aria-controls="approved_bookings">Approved Booking(s)</button>
-    <div class="row collapse " id="approved_bookings" style="min-height: 20px;">
+    <div class="row collapse me-3" id="approved_bookings" style="min-height: 20px;">
         {% for booking in booking_approved %}
         {% if booking.name == request.user or request.user|has_group:"Staff" %}
-        <div class="col-sm-2 col-md-4">
-            <div class="card" style="width: 400px">
+        <div class="col-md-4 col-lg-6">
+            <div class="card mb-3 border-success">
                 <div class="card-content">
                     {{ booking.name }}
                     is booked a
@@ -129,6 +131,7 @@
                 <div class="card-action">
                     <a href="" class="btn btn-danger" data-bs-toggle="modal"
                         data-bs-target="#cancel_booking_modal{{ booking.id }}">Cancel Booking</a>
+                    <br>
                 </div>
                 <div class="modal fade" id="cancel_booking_modal{{ booking.id }}" tabindex="-1"
                     aria-labelledby="cancel_booking_modal_label" aria-hidden="true">
