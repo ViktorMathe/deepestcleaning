@@ -22,3 +22,9 @@ function initMap(){
 
     const markerCluster = new markerClusterer.MarkerClusterer({ map, markers });
 }
+
+setTimeout(function () {
+    let messages = document.getElementById('popup');
+    let alert = new bootstrap.Alert(messages);
+    alert.close();
+}, 3500);

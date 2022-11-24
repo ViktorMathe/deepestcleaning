@@ -2,8 +2,8 @@ from django.shortcuts import render, reverse, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.views import generic, View
 from django.views.generic import FormView, TemplateView
-from django.http import HttpResponseRedirect, HttpResponse
-from django.core.exceptions import ValidationError
+from django.http import HttpResponseRedirect
+from django.contrib import messages
 from .models import Reviews, BookingSystem
 from .forms import ReviewForm, BookingForm
 from cloudinary.forms import cl_init_js_callbacks
@@ -26,10 +26,15 @@ class HomePage(FormView):
     def post(self, request, *args, **kwargs):
         booking_form = BookingForm(data=request.POST)
         context = {"booking_form": booking_form}
+        success_message = messages.add_message(
+            request,
+            messages.SUCCESS,
+            """Booking was successfull! You can view it now
+             in the Pending Booking secition!""")
         if booking_form.is_valid():
             booking_form.instance.name = request.user
             booking_form.save()
-            return HttpResponseRedirect(reverse("home"))
+            return HttpResponseRedirect(reverse("home"), success_message)
         else:
             return render(request, 'index.html', {'form': booking_form})
 
@@ -55,27 +60,37 @@ class EditBooking(View):
     def post(self, request, booking_id):
         booking = get_object_or_404(BookingSystem, id=booking_id)
         booking_form = BookingForm(request.POST, instance=booking)
-        status = booking.status
+        edit_booking_msg = messages.add_message(
+            request,
+            messages.INFO,
+            "Your Booking has been edited!")
         if booking_form.is_valid():
             booking_form.instance.name = request.user
             booking_form.save()
         context = {
             'booking': booking,
             'booking_form': booking_form,
-            'status': status
             }
-        return HttpResponseRedirect(reverse('home'), context)
+        return HttpResponseRedirect(reverse('home'), context, edit_booking_msg)
 
 
 def approve_booking(request, booking_id):
+    approve_msg = messages.add_message(
+        request,
+        messages.SUCCESS,
+        "Booking has been approved!")
     approve_booking = get_object_or_404(BookingSystem, id=booking_id)
     approve_booking.status = not approve_booking.status
     approve_booking.save()
-    return HttpResponseRedirect(reverse('home'))
+    return HttpResponseRedirect(reverse('home'), approve_msg)
 
 
 @login_required
 def cancel_booking(request, booking_id):
+    cancel_msg = messages.add_message(
+        request,
+        messages.ERROR,
+        "Booking has been deleted!")
     cancel_booking = BookingSystem.objects.filter(id=booking_id)
     cancel_booking.delete()
     return redirect('home')
@@ -98,13 +113,17 @@ class Review(FormView):
         queryset = Reviews.objects.filter(status=1)
         review = queryset
         review_form = ReviewForm(request.POST, request.FILES)
+        add_review_msg = messages.add_message(
+            request,
+            messages.SUCCESS,
+            "You succesfully left a review!")
         context = {"review_form": review_form}
         if review_form.is_valid():
             review_form.instance.name = request.user
             review_form.save()
         else:
             review_form = ReviewForm()
-        return HttpResponseRedirect(reverse("reviews"))
+        return HttpResponseRedirect(reverse("reviews"), add_review_msg)
 
     def get_context_data(self, **kwargs):
         context = super(Review, self).get_context_data(**kwargs)
@@ -125,17 +144,28 @@ class EditReview(View):
         return render(request, 'edit_review.html', context)
 
     def post(self, request, review_id):
+        edit_review_msg = messages.add_message(
+            request,
+            messages.INFO,
+            "Your review has been edited!")
         edit = get_object_or_404(Reviews, id=review_id)
         edit_form = ReviewForm(request.POST, request.FILES, instance=edit)
         if edit_form.is_valid():
             edit_form.instance.name = request.user
             edit_form.save()
         context = {'edit_form': edit_form}
-        return HttpResponseRedirect(reverse('reviews'), context)
+        return HttpResponseRedirect(
+            reverse('reviews'),
+            context,
+            edit_review_msg)
 
 
 @login_required
 def delete_review(request, review_id):
+    delete_msg = messages.add_message(
+        request,
+        messages.ERROR,
+        "Review has been deleted!")
     delete_review = Reviews.objects.filter(id=review_id)
     delete_review.delete()
     return redirect('reviews')

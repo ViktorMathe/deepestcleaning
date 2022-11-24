@@ -63,6 +63,10 @@ li{
     border-radius: 15px;
 }
 
+.dropdown ul{
+    background-color: rgb(47, 48, 48);
+}
+
 div#map {
     position: relative;
     min-height: 260px;
