@@ -30,7 +30,7 @@ class HomePage(FormView):
             request,
             messages.SUCCESS,
             """Booking was successfull! You can view it now
-             in the Pending Booking secition!""")
+             in the Pending Booking section!""")
         if booking_form.is_valid():
             booking_form.instance.name = request.user
             booking_form.save()
