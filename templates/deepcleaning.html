@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
+<body id="deepclean-bg" class="img-fluid">
 <h2>Deep Cleaning</h2>
-<div class="text-center">
+<div class="container">
+<div class="text-center info">
     Deep cleaning goes further to get rid of dirt, grime, soap scum, and other gunk around your home. It’s a more
     thorough service than the standard cleaning.
     You’re not just picking up the clutter and wiping down surfaces. You’re often sanitizing areas throughout the home.
@@ -15,4 +17,6 @@
     <br>
     <a class="btn btn-info text-center" href="{% url 'home' %}">Book Now!</a>
 </div>
+</div>
+</body>
 {% endblock content %}

@@ -1,12 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100&display=swap');
+
 html{
     position: relative;
     min-height: 100%;
     padding-bottom: 100px;
+    font-size: larger;
 }
 
 body{
     margin-bottom: 100px;
     background-color:#D7DDE0;
+    font-family: 'Lato', sans-serif;
 }
 
 footer{
@@ -74,4 +78,38 @@ li{
     bottom: 100px;
     min-height:160px;
     min-width:100%;
+}
+
+#logo{
+    max-height: 90px;
+    background-color: #D7DDE0;
+}
+
+.card{
+    background-color: #dfe2e5;
+    border-width: 2px;
+}
+
+#hero{
+    background:url("https://images.pexels.com/photos/1454804/pexels-photo-1454804.jpeg")center, no-repeat;
+    background-size: 100%;
+    height: 370px;
+    width: 600px;
+}
+
+#general-bg{
+    background: url('https://images.pexels.com/photos/48889/cleaning-washing-cleanup-the-ilo-48889.jpeg')center, no-repeat;
+    height: 100%;
+    width: 100%;
+}
+
+#deepclean-bg{
+    background: url('https://images.pexels.com/photos/1454804/pexels-photo-1454804.jpeg')center,no-repeat;
+    height: 100%;
+    width: 100%;
+}
+
+.info{
+    background-color: rgba(233, 239, 242, 0.8);
+    border-radius: 15px;
 }

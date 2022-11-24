@@ -5,13 +5,19 @@
 
 <div class="container text-center">
     <h3>Welcome on our site!</h3>
-    <div>
+    <div class="row justify-content-around">
+    <div class="col-4">
+        <div id="hero"></div>
+    </div>
+    <div class="col-4">
         We hope you will find the perfect service with us. We provide the best cleaning services around East-Anglia!
         We are happy to help either of a tiring deep cleaning or just a quick general one. We are prepared for
         everything. If you are not sure which cleaning you really need just click on the following links which gives you
-        more information about the different type of cleanings!</div>
+        more information about the different type of cleanings!
+        <br>
     <a href="{% url 'deepcleaning' %}">Deep Cleaning</a>
     <a href="{% url 'generalcleaning' %}">General Cleaning</a>
+</div>
 </div>
 <br>
 <div class="container text-center col-md-auto">

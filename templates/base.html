@@ -19,9 +19,9 @@
 </head>
 
 <body>
-    <img src="" width="100%">
     <nav class="navbar">
         <div class="container justify-content-center collapse navbar-collapse" id="navbarSupportedContent">
+            <img src="../static/images/logo.png" id="logo" class="rounded float-start" alt="first logo">
             <a href="{% url 'home' %}">Home</a>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -40,6 +40,7 @@
             <a class="nav-link" href="{% url 'account_signup' %}">Register</a>
             <a class="nav-link" href="{% url 'account_login' %}">Login</a>
             {% endif %}
+            <img src="../static/images/logo.png" id="logo" class="rounded float-start" alt="second logo">
     </nav>
     </div>
     <div class="container">
