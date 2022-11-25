@@ -1,19 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
 
-html{
+html {
     position: relative;
     min-height: 100%;
     padding-bottom: 100px;
     font-size: larger;
 }
 
-body{
+body {
     margin-bottom: 100px;
-    background-color:#D7DDE0;
+    background-color: #D7DDE0;
     font-family: 'Lato', sans-serif;
 }
 
-footer{
+header {
+    height: 100px;
+    font-size: x-large;
+}
+
+footer {
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -21,38 +26,41 @@ footer{
     background-color: #700D00;
 }
 
-footer a{
+footer a {
     color: #D7DDE0;
     margin: 3%;
     padding: 8px;
     font-size: x-large;
 }
 
-footer a:hover{
+footer a:hover {
     color: #D7DDE0;
     background-color: rgba(233, 239, 242, 0.2);
     border-radius: 25px;
 }
 
-footer p{
+footer p {
     color: #D7DDE0;
 }
 
-h1{
-    color:#D7DDE0;
+h1 {
+    color: #D7DDE0;
     text-align: center;
-    background-color:#700D00;
+    background-color: #700D00;
+    width: 100%;
+    height: 100%;
 }
-h2{
+
+h2 {
     text-align: center;
 }
 
-li{
+li {
     list-style-type: none;
 }
 
-.navbar{
-    background-color:#700D00;
+.navbar {
+    background-color: #700D00;
     color: #D7DDE0;
 }
 
@@ -63,53 +71,48 @@ li{
     padding-right: 20px;
 }
 
-.navbar a:hover{
+.navbar a:hover {
     color: #D7DDE0;
     background-color: rgba(233, 239, 242, 0.2);
     border-radius: 15px;
 }
 
-.dropdown ul{
+.dropdown ul {
     background-color: rgb(47, 48, 48);
 }
 
 #map {
-    position:absolute;
+    position: absolute;
     bottom: 100px;
-    min-height:160px;
-    min-width:100%;
+    min-height: 160px;
+    min-width: 100%;
 }
 
-#logo{
-    max-height: 90px;
+#logo {
+    max-height: 50px;
     background-color: #D7DDE0;
 }
 
-.card{
+.card {
     background-color: #dfe2e5;
     border-width: 2px;
 }
 
-#hero{
-    background:url("https://images.pexels.com/photos/1454804/pexels-photo-1454804.jpeg")center, no-repeat;
-    background-size: 100%;
-    height: 370px;
-    width: 600px;
-}
-
-#general-bg{
+#general-bg {
     background: url('https://images.pexels.com/photos/48889/cleaning-washing-cleanup-the-ilo-48889.jpeg')center, no-repeat;
+    background-size: cover;
     height: 100%;
     width: 100%;
 }
 
-#deepclean-bg{
-    background: url('https://images.pexels.com/photos/1454804/pexels-photo-1454804.jpeg')center,no-repeat;
+#deepclean-bg {
+    background: url('https://images.pexels.com/photos/1454804/pexels-photo-1454804.jpeg')center, no-repeat;
+    background-size: cover;
     height: 100%;
     width: 100%;
 }
 
-.info{
+.info {
     background-color: rgba(233, 239, 242, 0.8);
     border-radius: 15px;
 }
