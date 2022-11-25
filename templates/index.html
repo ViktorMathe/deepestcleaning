@@ -2,38 +2,43 @@
 {% block content %}
 {% load crispy_forms_tags %}
 {% load custom_filters %}
-
 <div class="container text-center">
-    <h3>Welcome on our site!</h3>
-    <div class="row">
-    <div>
-        <div></div>
+    <div class="row justify-content-center">
+        <h3 class="info">Welcome on our site!</h3>
     </div>
-    <div>
-        We hope you will find the perfect service with us. We provide the best cleaning services around East-Anglia!
-        We are happy to help either of a tiring deep cleaning or just a quick general one. We are prepared for
-        everything. If you are not sure which cleaning you really need just click on the following links which gives you
-        more information about the different type of cleanings!
-        <br>
-    <a href="{% url 'deepcleaning' %}">Deep Cleaning</a>
-    <a href="{% url 'generalcleaning' %}">General Cleaning</a>
-</div>
-</div>
-<br>
-<div class="container text-center col-md-auto">
-    <h6 id="msg">If you would like to Book a cleaning you have to 
-        <a href="{% url 'account_signup' %}">Register</a>
-        or if you already have an accout just <a href="{% url 'account_login' %}">Sign In!</a>
-    </h6>
-    {% if user.is_authenticated %}
-    <h4>Book a Cleaning Now!</h4>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form | crispy }}
-        <br>
-        <button class="btn btn-primary" type="submit" value="POST">Book Cleaning</button>
-    </form>
-</div>
+    <div class="row">
+        <div class="info">
+            We hope you will find the perfect service with us. We provide the best cleaning services around East-Anglia!
+            We are happy to help either of a tiring deep cleaning or just a quick general one. We are prepared for
+            everything. If you are not sure which cleaning you really need just click on the following links which gives
+            you
+            more information about the different type of cleanings!
+            <br>
+            <a id="deepclean-btn" href="{% url 'deepcleaning' %}">Deep Cleaning</a>
+            <a id="general-btn" href="{% url 'generalcleaning' %}">General Cleaning</a>
+        </div>
+    </div>
+    <br>
+    <div class="container text-center col-md-auto">
+        <div class="row justify-content-center">
+            <h6 id="msg" class="info">If you would like to Book a cleaning you have to
+                <a href="{% url 'account_signup' %}">Register</a>
+                or if you already have an accout just <a href="{% url 'account_login' %}">Sign In!</a>
+            </h6>
+        </div>
+        <div class="row justify-content-center">
+            {% if user.is_authenticated %}
+            <h4 class="info">Book a Cleaning Now!</h4>
+        </div>
+            <div class="row justify-content-center">
+            <form method="POST" class="info">
+                {% csrf_token %}
+                {{ form | crispy }}
+                <br>
+                <button class="btn btn-primary" type="submit" value="POST">Book Cleaning</button>
+            </form>
+        </div>
+    </div>
 <br>
 <div class="container text-center">
     <button class="btn btn-warning" type="button" data-bs-toggle="collapse" data-bs-target="#pending_bookings"
@@ -57,17 +62,18 @@
                     <a href="{% url 'edit_booking' booking.id %}" class="btn btn-warning">Edit</a>
                     <a href="" class="btn btn-danger" data-bs-toggle="modal"
                         data-bs-target="#cancel_booking_modal{{ booking.id }}">Cancel</a>
-                        {% if request.user|has_group:"Staff" %}
+                    {% if request.user|has_group:"Staff" %}
                     <a href="" class="btn btn-success" data-bs-toggle="modal"
                         data-bs-target="#approve_booking_modal{{ booking.id }}">Approve</a>
-                {% endif %}
+                    {% endif %}
                 </div>
                 <div class="modal fade" id="cancel_booking_modal{{ booking.id }}" tabindex="-1"
                     aria-labelledby="cancel_booking_modal_label" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="cancel_booking_modal">Are you sure you want to delete
+                                <h1 class="modal-title fs-5" id="cancel_booking_modal">Are you sure you want to
+                                    delete
                                     this Booking?</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
@@ -102,8 +108,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <a href="/approve_booking/{{ booking.id }}" type="button"
-                                    class="btn btn-success">
+                                <a href="/approve_booking/{{ booking.id }}" type="button" class="btn btn-success">
                                     {% csrf_token %}
                                     Approve</a>
                             </div>
@@ -144,7 +149,8 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="cancel_booking_modal">Are you sure you want to delete
+                                <h1 class="modal-title fs-5" id="cancel_booking_modal">Are you sure you want to
+                                    delete
                                     this Booking?</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>

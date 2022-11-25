@@ -19,7 +19,7 @@
   <script src="https://kit.fontawesome.com/4854b264bc.js" crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body id="body" class="home-bg deepclean-bg general-bg">
   <header class="text-center">
     <img src="{% static 'images/logo.png' %}" id="logo" class="rounded float-start ms-4" alt="first logo">
     <img src="{% static 'images/logo.png' %}" id="logo" class="rounded float-end me-4" alt="second logo">
@@ -43,18 +43,18 @@
           </a>
 
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="{% url 'deepcleaning' %}">Deep Cleaning</a></li>
+            <li><a id="deepclean-btn" class="dropdown-item" href="{% url 'deepcleaning' %}">Deep Cleaning</a></li>
             <li>
               <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item" href="{% url 'generalcleaning' %}">General Cleaning</a></li>
+            <li><a id="general-btn" class="dropdown-item" href="{% url 'generalcleaning' %}">General Cleaning</a></li>
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'reviews' %}">Reviews</a>
+          <a id="review-btn" class="nav-link" href="{% url 'reviews' %}">Reviews</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'contactus' %}">Contact Us</a>
+          <a id="contactus-btn" class="nav-link" href="{% url 'contactus' %}">Contact Us</a>
         </li>
         <li class="nav-item">
           {% if user.is_authenticated %}

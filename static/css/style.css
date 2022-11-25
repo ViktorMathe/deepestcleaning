@@ -23,7 +23,7 @@ footer {
     bottom: 0;
     width: 100%;
     height: 100px;
-    background-color: #700D00;
+    background-color: rgba(112, 13, 0, 0.9);
 }
 
 footer a {
@@ -46,7 +46,7 @@ footer p {
 h1 {
     color: #D7DDE0;
     text-align: center;
-    background-color: #700D00;
+    background-color: rgba(112, 13, 0, 0.9);
     width: 100%;
     height: 100%;
 }
@@ -55,12 +55,16 @@ h2 {
     text-align: center;
 }
 
+h3{
+    padding: 2px;
+}
+
 li {
     list-style-type: none;
 }
 
 .navbar {
-    background-color: #700D00;
+    background-color: rgba(112, 13, 0, 0.9);
     color: #D7DDE0;
 }
 
@@ -98,25 +102,29 @@ li {
     border-width: 2px;
 }
 
-#general-bg {
+.general-bg {
     background: url('https://images.pexels.com/photos/48889/cleaning-washing-cleanup-the-ilo-48889.jpeg')center, no-repeat;
     background-size: cover;
-    height: 100%;
-    width: 100%;
 }
 
-#deepclean-bg {
+.deepclean-bg {
     background: url('https://images.pexels.com/photos/1454804/pexels-photo-1454804.jpeg')center, no-repeat;
     background-size: cover;
-    height: 100%;
-    width: 100%;
 }
 
 .info {
-    background-color: rgba(233, 239, 242, 0.8);
+    background-color: rgba(233, 239, 242, 0.95);
     border-radius: 15px;
+    padding: 10px;
+    width: fit-content;
 }
 
 .hide{
     display: none;
+}
+
+.home-bg{
+    background: url("https://images.pexels.com/photos/2724749/pexels-photo-2724749.jpeg"),center,no-repeat;
+    background-size: cover;
+    filter: alpha(opacity=70);
 }

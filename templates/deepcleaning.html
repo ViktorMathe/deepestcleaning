@@ -1,22 +1,30 @@
 {% extends 'base.html' %}
 {% block content %}
-<body id="deepclean-bg" class="img-fluid">
 <h2>Deep Cleaning</h2>
 <div class="container">
-<div class="text-center info">
-    Deep cleaning goes further to get rid of dirt, grime, soap scum, and other gunk around your home. It’s a more
-    thorough service than the standard cleaning.
-    You’re not just picking up the clutter and wiping down surfaces. You’re often sanitizing areas throughout the home.
-    Sanitizing and disinfecting surfaces can help get rid of germs that can make your family sick.
-    Deep cleaning can make your home a healthier environment by getting rid of dirt, dust, and other junk. It also makes
-    it look and smell fresh and clean.
-    Deep cleaning typically takes longer than a general cleaning service, especially if you schedule a deep cleaning for
-    your entire home. It involves lots of detail work, which takes more effort.
-    If you decided you need to have a deep cleaning service just press the <strong>Book Now!</strong> button and it
-    takes you to the home page where you can book an appoitment!
-    <br>
-    <a class="btn btn-info text-center" href="{% url 'home' %}">Book Now!</a>
+    <div class="row text-center">
+        <div class="info">
+            Deep cleaning goes further to get rid of dirt, grime, soap scum, and other gunk around your home. It’s a
+            more
+            thorough service than the standard cleaning.
+            You’re not just picking up the clutter and wiping down surfaces. You’re often sanitizing areas
+            throughout
+            the home.
+            Sanitizing and disinfecting surfaces can help get rid of germs that can make your family sick.
+            Deep cleaning can make your home a healthier environment by getting rid of dirt, dust, and other junk.
+            It
+            also makes
+            it look and smell fresh and clean.
+            Deep cleaning typically takes longer than a general cleaning service, especially if you schedule a deep
+            cleaning for
+            your entire home. It involves lots of detail work, which takes more effort.
+            If you decided you need to have a deep cleaning service just press the <strong>Book Now!</strong> button
+            and
+            it
+            takes you to the home page where you can book an appoitment!
+            <br>
+            <a class="btn btn-info text-center" href="{% url 'home' %}">Book Now!</a>
+        </div>
+    </div>
 </div>
-</div>
-</body>
 {% endblock content %}

@@ -26,15 +26,14 @@ class HomePage(FormView):
     def post(self, request, *args, **kwargs):
         booking_form = BookingForm(data=request.POST)
         context = {"booking_form": booking_form}
-        success_message = messages.add_message(
-            request,
-            messages.SUCCESS,
-            """Booking was successfull! You can view it now
-             in the Pending Booking section!""")
         if booking_form.is_valid():
             booking_form.instance.name = request.user
+            messages.add_message(request, messages.SUCCESS, """
+            Booking was successfull! You can view it now
+                         in the Pending Booking section!
+                         """)
             booking_form.save()
-            return HttpResponseRedirect(reverse("home"), success_message)
+            return HttpResponseRedirect(reverse("home"))
         else:
             return render(request, 'index.html', {'form': booking_form})
 
@@ -60,18 +59,16 @@ class EditBooking(View):
     def post(self, request, booking_id):
         booking = get_object_or_404(BookingSystem, id=booking_id)
         booking_form = BookingForm(request.POST, instance=booking)
-        edit_booking_msg = messages.add_message(
-            request,
-            messages.INFO,
-            "Your Booking has been edited!")
         if booking_form.is_valid():
             booking_form.instance.name = request.user
+            messages.add_message(request, messages.INFO, """
+            Your Booking has been edited!""")
             booking_form.save()
         context = {
             'booking': booking,
             'booking_form': booking_form,
             }
-        return HttpResponseRedirect(reverse('home'), context, edit_booking_msg)
+        return HttpResponseRedirect(reverse('home'), context)
 
 
 def approve_booking(request, booking_id):
