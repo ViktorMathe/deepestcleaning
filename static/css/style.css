@@ -116,3 +116,7 @@ li {
     background-color: rgba(233, 239, 242, 0.8);
     border-radius: 15px;
 }
+
+.hide{
+    display: none;
+}

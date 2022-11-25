@@ -28,3 +28,15 @@ setTimeout(function () {
     let alert = new bootstrap.Alert(messages);
     alert.close();
 }, 3500);
+
+hideMessage(function(){
+    let msg = document.getElementById('msg');
+    var auth = "{{ request.user.is_authenticated }}";
+
+    if (auth) {
+        msg.classList.add('hide')
+    }
+    else {
+        msg.classList.remove('hide')
+    }
+})

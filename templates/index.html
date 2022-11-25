@@ -21,10 +21,10 @@
 </div>
 <br>
 <div class="container text-center col-md-auto">
-    <h5>If you would like to Book a cleaning you have to 
+    <h6 id="msg">If you would like to Book a cleaning you have to 
         <a href="{% url 'account_signup' %}">Register</a>
         or if you already have an accout just <a href="{% url 'account_login' %}">Sign In!</a>
-    </h5>
+    </h6>
     {% if user.is_authenticated %}
     <h4>Book a Cleaning Now!</h4>
     <form method="POST">
@@ -38,7 +38,7 @@
 <div class="container text-center">
     <button class="btn btn-warning" type="button" data-bs-toggle="collapse" data-bs-target="#pending_bookings"
         aria-expanded="true" aria-controls="pending_bookings">Pending Booking(s)</button>
-    <div class="row collapse me-3" id="pending_bookings" style="min-height: 20px;">
+    <div class="row collapse" id="pending_bookings" style="min-height: 20px;">
         {% for booking in booking_pending %}
         {% if booking.name == request.user or request.user|has_group:"Staff" %}
         <div class="col-md-4 col-lg-6">
@@ -120,7 +120,7 @@
 <div class="container text-center">
     <button class="btn btn-success" type="button" data-bs-toggle="collapse" data-bs-target="#approved_bookings"
         aria-expanded="false" aria-controls="approved_bookings">Approved Booking(s)</button>
-    <div class="row collapse me-3" id="approved_bookings" style="min-height: 20px;">
+    <div class="row collapse" id="approved_bookings" style="min-height: 20px;">
         {% for booking in booking_approved %}
         {% if booking.name == request.user or request.user|has_group:"Staff" %}
         <div class="col-md-4 col-lg-6">
