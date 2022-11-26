@@ -107,7 +107,7 @@ li {
 }
 
 .info {
-    background-color: rgba(233, 239, 242, 0.95);
+    background-color: rgba(191, 191, 191, 0.95);
     border-radius: 15px;
     padding: 10px;
     width: fit-content;
@@ -118,6 +118,6 @@ li {
 }
 
 body{
-    background: url("/static/images/bg.webp") center no-repeat;
+    background: url('/static/images/bg.webp') center no-repeat;
     background-size: cover;
 }
