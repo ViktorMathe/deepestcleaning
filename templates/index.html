@@ -14,31 +14,34 @@
             you
             more information about the different type of cleanings!
             <br>
-            <a id="deepclean-btn" href="{% url 'deepcleaning' %}">Deep Cleaning</a>
-            <a id="general-btn" href="{% url 'generalcleaning' %}">General Cleaning</a>
+            <a href="{% url 'deepcleaning' %}">Deep Cleaning</a>
+            <a href="{% url 'generalcleaning' %}">General Cleaning</a>
         </div>
     </div>
-    <br>
-    <div class="container text-center col-md-auto">
-        <div class="row justify-content-center">
-            <h6 id="msg" class="info">If you would like to Book a cleaning you have to
-                <a href="{% url 'account_signup' %}">Register</a>
-                or if you already have an accout just <a href="{% url 'account_login' %}">Sign In!</a>
-            </h6>
-        </div>
-        <div class="row justify-content-center">
-            {% if user.is_authenticated %}
-            <h4 class="info">Book a Cleaning Now!</h4>
-        </div>
-            <div class="row justify-content-center">
-            <form method="POST" class="info">
-                {% csrf_token %}
-                {{ form | crispy }}
-                <br>
-                <button class="btn btn-primary" type="submit" value="POST">Book Cleaning</button>
-            </form>
-        </div>
+</div>
+<br>
+<div class="container text-center col-md-auto">
+    <div class="row justify-content-center">
+        <h6 id="msg" class="info">If you would like to Book a cleaning you have to
+            <a href="{% url 'account_signup' %}">Register</a>
+            or if you already have an accout just <a href="{% url 'account_login' %}">Sign In!</a>
+        </h6>
     </div>
+    </div>
+    <div class="row justify-content-center">
+        {% if user.is_authenticated %}
+        <h4 class="info">Book a Cleaning Now!</h4>
+    </div>
+    <div class="row justify-content-center">
+        <form method="POST" class="info">
+            {% csrf_token %}
+            {{ form | crispy }}
+            <br>
+            <button class="btn btn-primary" type="submit" value="POST">Book Cleaning</button>
+        </form>
+    </div>
+</div>
+</div>
 <br>
 <div class="container text-center">
     <button class="btn btn-warning" type="button" data-bs-toggle="collapse" data-bs-target="#pending_bookings"

@@ -96,7 +96,7 @@ li {
     min-width: 100%;
 }
 
-#logo {
+.own-logo {
     max-height: 50px;
     background-color: #D7DDE0;
 }
