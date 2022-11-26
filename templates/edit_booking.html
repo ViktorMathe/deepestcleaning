@@ -2,11 +2,12 @@
 {% block content %}
 {% load crispy_forms_tags %}
 {% load custom_filters %}
-<div>
+<div class="container info text-center">
+    <h5>Edit Booking</h5>
     <form method="POST">
         {% csrf_token %}
         {{ booking_form | crispy}}
-        <input type="submit" value="Save">
+        <input class="btn btn-warning" type="submit" value="Save">
     </form>
 </div>
 {% endblock content %}

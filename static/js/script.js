@@ -28,32 +28,3 @@ setTimeout(function () {
     let alert = new bootstrap.Alert(messages);
     alert.close();
 }, 3500);
-
-hideMessage(function(){
-    let msg = document.getElementById('msg');
-    var auth = "{{ request.user.is_authenticated }}";
-
-    if (auth) {
-        msg.classList.add('hide')
-    }
-    else {
-        msg.classList.remove('hide')
-    }
-})
-
-
-let body = document.getElementById('body');
-document.getElementById('deepclean-btn').addEventListener('click', deepclean);
-document.getElementById('general-btn').addEventListener('click', general);
-document.getElementById('review-btn').addEventListener('click', review);
-document.getElementById('contactus-btn').addEventListener('click', contactus);
-
-window.onload = function(){
-    body.classList.remove('home-bg');
-    body.classList.remove('general-bg');
-};
-
-function deepclean(_event) {
-    body.classList.remove('home-bg');
-    body.classList.remove('general-bg');
-};

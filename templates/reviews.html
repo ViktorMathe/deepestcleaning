@@ -3,35 +3,46 @@
 {% load crispy_forms_tags %}
 {% load custom_filters %}
 
-<div class="container-fluid text-center">
+<div class="container-fluid text-center info">
     <h3>Reviews</h3>
-    {% for review in reviews %}
-    <p>{{ review.title }}</p>
-    <p>{{ review.content }}</p>
-   <img src=" {{ review.image.url }}" alt="{{ review_instance.image.name}}" width="15%">
-    <p>{{ review.name }}</p>
-    <p>{{ review.updated }}</p>
-    {% endfor %}
 </div>
-<div class="container text-center">
+{% for review in reviews %}
+<div class="card mb-3" style="max-width: 540px;">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="{{ review.image.url }}" class="img-fluid rounded-start" alt="{{ review_instance.image.name}}">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{ review.title }}</h5>
+          <p class="card-text">{{ review.content }}</p>
+          <p class="card-text"><small class="text-muted">{{ review.updated }}</small></p>
+          <p class="card-text"><small class="text-muted">{{ review.name }}</small></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+<div class="container float-start">
     {% if user.is_authenticated %}
     <button class="btn btn-info" type="button" data-bs-toggle="collapse" data-bs-target="#add_review"
         aria-expanded="false" aria-controls="add_review">Add Review</button>
-    <div class="collapse" id="add_review">
+    <div class="collapse info" id="add_review">
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{ review_form | crispy }}
-            <button type="submit" value="POST">Submit</button>
+            <button class="btn btn-success" type="submit" value="POST">Submit</button>
         </form>
     </div>
     <div>
+        <br>
         <button class="btn btn-warning" type="button" data-bs-toggle="collapse" data-bs-target="#update_review"
             aria-expanded="false" aria-controls="update_review">Edit/Delete Reviews</button>
         <div class="row collapse" id="update_review">
             {% for review in reviews %}
             {% if review.name == request.user or request.user|has_group:"Staff" %}
-            <div class="col-sm-2 col-md-4">
-                <div class="card">
+            <div class="col-md-4 col-lg-6">
+                <div class="card mb-3">
                     <div class="card-content">
                         <p>{{ review.title }}</p>
                         <p>{{ review.content }}</p>

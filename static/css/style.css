@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;1,300&display=swap');
 
 html {
     position: relative;
@@ -16,6 +16,8 @@ body {
 header {
     height: 100px;
     font-size: x-large;
+    font-family: 'Lato', sans-serif;
+    font-style: italic;
 }
 
 footer {
@@ -53,10 +55,12 @@ h1 {
 
 h2 {
     text-align: center;
+    font-style: italic;
 }
 
 h3{
     padding: 2px;
+    font-style: italic;
 }
 
 li {
@@ -102,16 +106,6 @@ li {
     border-width: 2px;
 }
 
-.general-bg {
-    background: url('https://images.pexels.com/photos/48889/cleaning-washing-cleanup-the-ilo-48889.jpeg')center, no-repeat;
-    background-size: cover;
-}
-
-.deepclean-bg {
-    background: url('https://images.pexels.com/photos/1454804/pexels-photo-1454804.jpeg')center, no-repeat;
-    background-size: cover;
-}
-
 .info {
     background-color: rgba(233, 239, 242, 0.95);
     border-radius: 15px;
@@ -123,8 +117,7 @@ li {
     display: none;
 }
 
-.home-bg{
-    background: url("https://images.pexels.com/photos/2724749/pexels-photo-2724749.jpeg"),center,no-repeat;
+body{
+    background: url(../images/bg.webp) center no-repeat;
     background-size: cover;
-    filter: alpha(opacity=70);
 }
