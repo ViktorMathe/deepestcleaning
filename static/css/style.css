@@ -118,6 +118,6 @@ li {
 }
 
 body{
-    background: url('/static/images/bg.webp') center no-repeat;
+    background: url('{% static "images/bg.webp" %}') center no-repeat;
     background-size: cover;
 }
