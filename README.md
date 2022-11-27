@@ -1,15 +1,3 @@
-
-Technology used:
-django framework
-elephant postgresql database
-python
-css3
-html5
-js
-bootstrap
-jquery
-google api
-
 # **The Deepest Cleaning** 
 
 I built this website to the people who would like to clean their house or for airbnb house's hosts who are looking for a new cleaning company. The deepest cleaning website has it is own booking system what the user can use after registration and they can leave a review as well with pictures if they would like to. They can edit the bookings until it is pending (change time slots or date), but if it is already been approved the user can just cancel it. The review can be updated too. The website has all the information about the company and about the two types of cleaning which is general and deep cleaning, on the contact us page they can see on the map where the company is located. 
@@ -19,6 +7,10 @@ I built this website to the people who would like to clean their house or for ai
 ![Home page](./static/images/homepage.png)
 
 ## _**Contents**_
+
+* [User Stories](#user-stories)
+    * [Completed User Stories](#completed-user-stories)
+    * [Not completed User Stories](#not-completed-user-stories)
 
 * [Features](#features)
     * [Future ideas](#future-ideas)
@@ -35,24 +27,58 @@ I built this website to the people who would like to clean their house or for ai
     * [Lighthouse](#lighthouse)
     * [Manual testing](#manual-testing)
     * [Solved bugs](#solved-bugs)
-    * [Known bugs](#known-bugs)
+
+* [Technology Used](#technology-used)
 
 * [Deployment](#deployment)
 
 * [Credits](#credits)
-    
+
+
+## _**User Stories**_
+
+ ### _**Completed User Stories:**_
+
+    * As a User I want to able to register to the website to book my cleaning
+
+    * As a User I would like to be able to book a cleaning
+
+    * As a User I would like to write review about the company
+
+    * As a User I would like to upload images for my reviews
+
+    * As a User I would like to be able to book a cleaning
+
+    * As a User I would like to see my booking information and confirmation in a separate field
+
+    * As an Staff member I would like to sign in and see different options to confirm the bookings or answer questions
+
+    * As a Staff member I want to be able to approve the booked time slots
+
+    * As a User/Staff member I would like to edit or delete the reviews
+
+ ### _**Not completed User Stories:**_
+    * As a User I would like to see what day or time slots are available
+
+    * As a User I would like to ask my own questions on the site
+
+    * As a User/Admin I would like to comment on the questions or answer it
+
+* You can find the agile method to my user stories on my github repo just click [here](https://github.com/users/ViktorMathe/projects/5/views/1)
 
 ## _**Features**_
 
-I created a website where the user can book an appoitment to two type of cleaning services and if would like even can leave a review with or without a picture. The user has to log in/ register first to see or use all the features.
+I created a website where the user can book an appoitment to two type of cleaning services and if would like even can leave a review with or without a picture. The user has to log in/ register first to see or use all the features.  
 
 ![Booking](./static/images/booking.png)
 ![Review](./static/images/reviews.png)
 
- The user can check if the booked appoitment either is still pending or has been approved.
+ The user can check if the booked appoitment either is still pending or has been approved.  
+
 ![Approve/Pending](./static/images/pending-approve-bookings.png)
 
-And if the user wish can change the still pending booking but which has been approved can not been edited just delete it.
+And if the user wish can change the still pending booking but which has been approved can not been edited just delete it.  
+
 ![Edit](./static/images/edit-booking.png)
 ![Delete](./static/images/delete-booking.png)
 
@@ -63,6 +89,8 @@ I hope everybody found this website useful and easy to navigate on even if the c
   * I would like to send e-mails when the user registered/booked an appoitment 
   * I would like to send an e-mail to confirm the booking.
   * Make a contact form where the user can ask anything from the cleaning staff
+  * Add comment/answer option to the question forms.
+  * The user can see which days and time slots are available to book.
 
   ## _**Design**_
 
@@ -97,60 +125,99 @@ I hope everybody found this website useful and easy to navigate on even if the c
 * ### _Manual testing:_
     * 
 
-![mobile welcome page](./assets/images/readme-images/mobile-welcome.jpg) ![mobile categories](./assets/images/readme-images/mobile-cat.jpg)
-
-s ![iPad welcome](./assets/images/readme-images/ipad-welcome.jpg) ![iPad questions](./assets/images/readme-images/ipad-questions.jpg)
-
  * ### _Solved bugs_:
 
-    1. when i wrote a review it has not been sent to the database
-    I did the "makemigrations" command loads of times but did not actually "migrate" it. that is why the database was not connected properly
+    1. Bug: When I wrote a review it has not been sent to the database.  
+    Solution: I did the "makemigrations" command loads of times but did not actually "migrate" it. that is why the database was not connected properly.
 
-    2. I made the form to leave a review but it did not show up on the template
-    I was using a class based formview to render the template but I have not get the context data so the form did not show up
+    2. Bug: I made the form to leave a review but it did not show up on the template.  
+    Solution: I was using a class based formview to render the template but I have not get the context data so the form did not show up.
 
-    3. I had a problem with the edit review/booking I could not pull the data which was already been wrote in the review or been booked in a modal
-    I had a nice session with the tutors about it and at the end Ger said the big issues was I had to make a separate html for the edit where I can bring up the review/booking with the right id.
+    3. Bug: I had a problem with the edit review/booking I could not pull the data which was already been wrote in the review or been booked in a modal.  
+    Solution: I had a nice session with the tutors about it and at the end Ger said the big issues was I had to make a separate html for the edit where I can bring up the review/booking with the right id.
 
-    4. When the user had to write the date for cleaning date there was no calendar just had to put in manually.
-    Lucky for me the mentor showed me a solution with a widget in the forms and all was good.
+    4. Bug: When the user had to write the date for cleaning date there was no calendar just had to put in manually.  
+    Solution: Lucky for me my mentor showed me a solution with a widget in the forms and all was good.
 
-    5. I couldn not show the validation message when the user choose a day in the past.
-    The issue was I redirected the site to the home page after form has been done and the user could not see any message but the easy solution wwas just render it.
+    5. Bug: I coud not upload any images to the review page on the frontend.  
+    Solution: 
 
-    6. approve button not working
-    change the integerfield to boolean field and toggle instead of a form
+    6. Bug: I couldn not show the validation message when the user choose a day in the past.  
+    Solution: The issue was I redirected the site to the home page after form has been done and the user could not see any message but the easy solution wwas just render it.
 
-    7. after deployment to heroku the static files are not found
-    it happaned because the Debug in the settings was on True and I deployed like that, after I changed it to False everything went perfect.
+    7. Bug: Approve button not working.  
+    Solution: Change the integerfield to boolean field and toggle instead of a form.
 
- * ### _Known bugs:_
+    8. Bug: After deployment to heroku, the static files are not found.  
+    Solution: It happaned because the Debug in the settings was on True and I deployed like that, after I changed it to False everything went perfect.
 
-    1. I just found one bug what I know which is shows in the JSHint report. The categories is an unused variable, which is really not but the categories function using an 'onclick' method instead of the event listener and the JSHint can not read other files that is why I have this trouble. I will make sure it is change to the event listener in the future.
+
+## _**Technology Used**_
+* [Django](https://www.djangoproject.com/ "Django Project website")
+    - Django was used to build the models, forms and views of the app, and was the backbone of this project.
+* [Bootstrap](https://getbootstrap.com/docs/5.2/getting-started/introduction/ "Bootstrap")
+     - Bootstrap was used to implement the responsiveness of the site, using bootstrap classes, but also other styling such as buttons etc.
+* [Cloudinary](https://cloudinary.com/ "Cloudinary")
+     - Cloudinary was used as free cloud storage for images uploaded to the site through the recipe forms.
+* [Summernote](https://summernote.org "Summernote page")
+     - Summernote was used to allow users to add styling when adding a recipe to the site. This is particularly useful for using bullet points for ingredients or numbering the steps for the recipe.
+* [Crispy Forms](https://django-crispy-forms.readthedocs.io/en/latest/ "Crispy Forms documentation")
+    - Crispy Forms was used to style the add and edit recipe forms, allowing more than one field to occupy a line on the form.
+* [Google Fonts](https://fonts.google.com/ "Google Fonts")
+    - Google fonts were used to import the fonts "Playfair Display" and "Lato" into the style.css file. These fonts were used throughout the project.
+* [Font Awesome](https://fontawesome.com/ "FontAwesome")
+     - Font Awesome was used on all pages throughout the website to import icons (e.g. social media icons) for UX purposes.
+* [GitPod](https://git-scm.com/ "GitPod")
+     - Git was used for version control by utilizing the GitPod terminal to commit to Git and push to GitHub.
+* [GitHub](https://github.com/ "Link to GitHub")
+     - GitHub was used to store the project after pushing
+* [ElephantSQL](https://www.elephantsql.com/ "ElephantSQL Database")
+    - ElephantSQL was used to the new database instead of the Heroku's Postgres
+* [Google Maps API](https://developers.google.com/maps/documentation/javascript/marker-clustering/ "Google Maps API")
+ -  Google Maps API was used to make the map visible on the site with the marker on it.
 
 ## _**Deployment**_
 
-This site was deployed to GitHub Pages by following these steps:
-1. Login or Sign Up to [GitHub](www.github.com).
-2. Create a new repository named "spiderman-quiz".
-3. Once created, click on "Settings" on the navigation bar under the repository title.
-4. Scroll down to "GitHub Pages".
-5. Under "Source", choose which branch to deploy. I chose "master", but this is sometimes shown as "main".
-6. Choose which folder to deploy from, usually "/root".
-7. Click "Save", then wait for it to be deployed. It can take some time for the page to be fully deployed.
-8. Your URL will be displayed above "Source".
-9. [Live website](https://viktormathe.github.io/spiderman-quiz/)
+1. Create the Heroku App:
+    - Select "Create new app" in Heroku.
+    - Choose a name for your app and select the location.  
 
+2. Attach the Postgres database:
+    - In the Resources tab, under add-ons, type in Postgres and select the Heroku Postgres option.
+
+3. Attach the ElephantSQL database (instead of Postgre on Heroku):  
+    - 
+
+4. Prepare the environment and settings.py file:
+    - In the Settings tab, click on Reveal Config Vars and copy the url next to DATABASE_URL.
+    - In your GitPod workspace, create an env.py file in the main directory. 
+    - Add the DATABASE_URL value and your chosen SECRET_KEY value to the env.py file.
+    - Add the SECRET_KEY value to the Config Vars in Heroku.
+    - Update the settings.py file to import the env file and add the SECRETKEY and DATABASE_URL file paths.
+    - Update the Config Vars with the Cloudinary url, adding into the settings.py file also.
+    - In settings.py add the following sections:
+        - Had to the add the followings to the INSTALLED_APPS list:
+            - Cloudinary
+            - allauth ( for the register/login)
+            - django summernote
+            - crispy forms
+        - MESSAGE_TAGS ( to get the pop up messages if some action happened)
+        - CLOUDINARY_STORAGE (to upload the images )
+        - STATICFILE_STORAGE
+        - STATICFILES_DIRS
+        - STATIC_ROOT
+        - MEDIA_URL
+        - DEFAULT_FILE_STORAGE
+        - TEMPLATES_DIR
+        - Update DIRS in TEMPLATES with TEMPLATES_DIR
+        - Update ALLOWED_HOSTS with ['app_name.heroku.com', 'localhost']
 
 
 * ## _**Credits**_
 
-    *  I download a Spider-Man themed font from the [1001 Fonts website](https://www.1001fonts.com/homoarakhn-font.html), which is free to use for everybody and applyed it on the welcome page and the copyright information on the footer.
+    * The background I found it on the [Pexels.com](https://www.pexels.com/photo/white-wooden-cupboards-2724749/)
 
-    * The rest of the page is using a Comic Neue font from the [Google Fonts](https://fonts.google.com/specimen/Comic+Neue?preview.text=Questions&preview.text_type=custom&query=comic).
+    * I would like to give credit to my mentor, the tutors helped me a lot during this project. I am really aprreciate it.
 
-    * Source to the images: 
-                  [Welcome image](https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/942d6891-f116-4a84-9c4e-cd6f2e736369/dcpnqvz-2d29d21a-4cbf-4e9e-8214-24183b45cd15.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzk0MmQ2ODkxLWYxMTYtNGE4NC05YzRlLWNkNmYyZTczNjM2OVwvZGNwbnF2ei0yZDI5ZDIxYS00Y2JmLTRlOWUtODIxNC0yNDE4M2I0NWNkMTUucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.uBlCPfGnjbFg5LKbg3auyL3NnGNc01obaH6XPJLddGI) , 
-                  [Mobile welcome image](https://unsplash.com/photos/PXjQaGxi4JA) , [Main background](https://my4kwallpapers.com/wp-content/uploads/2020/09/Spiderman-4k-Wallpaper.jpg) , [Mobile background](https://1.bp.blogspot.com/-Bj2PS8yDKfM/YCn0zy8-AFI/AAAAAAAADOI/r7yy_WLMlh0XSvmV84dxj2FxRLYSUIUJQCLcBGAsYHQ/s600-rw/spiderman-back-logo-peter-parker-heroscreen.cc-hd-mobile-8.1933.jpg) , [Low score](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTk7K4DgqTRZRqY7biRhJQJkUqpkKu4ygquHw&usqp=CAU) , [Mid score](https://cdn.vox-cdn.com/thumbor/SLhFTTOcnZnb-PPIiJumu0WDY4Y=/85x0:1014x619/1200x800/filters:focal(85x0:1014x619)/cdn.vox-cdn.com/uploads/chorus_image/image/45660688/spiderman-marvel.0.0.jpg) , [High score](https://images.thedirect.com/media/article_big/Spider-man-logos.jpg?imgeng=cmpr_75/)
+    * The logo was made by my wife, Roxana Mathe done it with Adobe Photoshop.
 
-    * I found the theme song on the [YouTube](https://www.youtube.com/watch?v=j8deCNfNjO4&list=LL&index=2) which has no copyright on it and I could download it from the following [link](https://drive.google.com/file/d/1nwQRvlF6HnAgeZIeMmzKsoG1iGTKsz80/view).
