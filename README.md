@@ -38,8 +38,12 @@ I built this website to the people who would like to clean their house or for ai
 ## _**User Stories**_
 
  ### _**Completed User Stories:**_
+    
+    * As a User I would like to have a clean layout what is easy to see through
 
     * As a User I want to able to register to the website to book my cleaning
+
+    * As a User I would like to have an easy navigation between the pages
 
     * As a User I would like to be able to book a cleaning
 
@@ -140,7 +144,7 @@ I hope everybody found this website useful and easy to navigate on even if the c
     Solution: Lucky for me my mentor showed me a solution with a widget in the forms and all was good.
 
     5. Bug: I coud not upload any images to the review page on the frontend.  
-    Solution: 
+    Solution: As I spoke with the tutors they point me to the right direction to I have to include a tag in the form which was the following : enctype="multipart/form-data" and this tag is let me upload the image from the front end.
 
     6. Bug: I couldn not show the validation message when the user choose a day in the past.  
     Solution: The issue was I redirected the site to the home page after form has been done and the user could not see any message but the easy solution wwas just render it.
@@ -180,15 +184,35 @@ I hope everybody found this website useful and easy to navigate on even if the c
 
 1. Create the Heroku App:
     - Select "Create new app" in Heroku.
-    - Choose a name for your app and select the location.  
+    - Choose a name for your app and select the location.
 
-2. Attach the Postgres database:
+2. Connect GitHub repo:
+    - On the deploy tab you choose the deployment method GitHub
+    - You type your GitHub repo name to connect with Heroku
+    - Click Connect
+
+3. Attach the Postgres database:
     - In the Resources tab, under add-ons, type in Postgres and select the Heroku Postgres option.
 
-3. Attach the ElephantSQL database (instead of Postgre on Heroku):  
-    - 
+4. Attach the ElephantSQL database (instead of Postgre on Heroku):  
+    - Login to the ElephantSQL website
+    - Create New Instance
+    - Have to give a name to the plan and had to choose the Tiny Turtle plan which is free
+    - Select the region, and data center near your location
+    - Click Review and Create Instance
+    - Return to the dashboard and click on the instance name and copy the ElephantSQL database URL
+    - Code Institute provided a Postgres Migration Tool repo what I had to open and run  a python3 reel2reel.py command in the terminal
+    - On the Heroku website go to the settings, reveal config vars
+    - At the DATABASE_URL config var have to paste the Postgres URL and copy it to the migration tool and click enter
+    - When the terminal asked you had to paste the elephantSQL database url to the migration tool and click enter
+    - If you done you go the resources tab on the Heroku site and remove the existing Postgres add-on
+    - Write your app name to confirm the delete
+    - Go to the settings tab reveal the config vars and the DATABASE_URL should have gone by now
+    - Add a new config var called DATABASE_URL and paste your ElephantSQL database url and click Add
+    - The database has been changed
 
-4. Prepare the environment and settings.py file:
+
+5. Prepare the environment and settings.py file:
     - In the Settings tab, click on Reveal Config Vars and copy the url next to DATABASE_URL.
     - In your GitPod workspace, create an env.py file in the main directory. 
     - Add the DATABASE_URL value and your chosen SECRET_KEY value to the env.py file.
@@ -211,6 +235,13 @@ I hope everybody found this website useful and easy to navigate on even if the c
         - TEMPLATES_DIR
         - Update DIRS in TEMPLATES with TEMPLATES_DIR
         - Update ALLOWED_HOSTS with ['app_name.heroku.com', 'localhost']
+
+    6. Deployment:
+        - On the Heroku website you navigate to the deploy tab
+        - You look for the Manual Deploy and choose the "main" branch
+        - Click Deploy Branch
+
+    7. Live website : [The Deepest Cleaning](https://the-deepest-cleaning-vm.herokuapp.com/)
 
 
 * ## _**Credits**_
