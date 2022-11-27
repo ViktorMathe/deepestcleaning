@@ -127,32 +127,119 @@ I hope everybody found this website useful and easy to navigate on even if the c
     The performance keep jumping up and down but always still in the green area the best practices is a bit lower because I used jQuery and the Google Maps API.
 
 * ### _Manual testing:_
-    * 
+
+    #### **Register New Account**
+
+    * Expected: As a User I want to able to register to the website to book my cleaning 
+    * Test: Create new account with username, create new account with already existing username, create new account with and without email address.  
+    * Outcome: If the new account has a username the account is created, if an email address is entered or not. When trying to create a new account with an existing username, the user is encouraged to choose a different username since it already exists. When the account is registered the user is logged in and is notified by an alert. 
+
+    #### Login
+
+    * Expected: As a registered site user you should be able to log in to your accout to be able to interact with the site.
+    * Test: Check Login functionality as registered user. 
+    * Outcome: When entering valid login details the user is logged in and redirected to the home page and an alert notifies the user that they are logged in. 
+
+    #### Logout
+
+    * Expected: As a registered and logged in user you should be able to log out of the site. 
+    * Test: Check Logout functionality as logged in user. 
+    * Result: When clicking Logout the user is redirected to Logout page and asked to confirm that they are want to log out. When Log Out button is clicked the user is logged out and redirected to home page and an alert notifies the user that they are logged out.  
+
+    #### **Testing as a User**
+
+    #### Make a Booking
+
+    * Expected : The user can book an appoitment and can view it in the pending booking section until is not been approved and get a notification when the booking was done.
+    * Test: Made the booking as a user.
+    * Outcome: When the booking has been made I get the notification and it appeared in the pending booking section.
+
+    #### Edit a Booking
+    
+    * Expected : The user can edit an appoitment if it has not been approved and can view it in the pending booking section and get a notification when the booking was done.
+    * Test: Edit the booking as a user.
+    * Outcome: When the booking has been edited I get the notification and it has been changed.
+
+    #### Delete a Booking
+    
+    * Expected : The user can delete an appoitment if it either been approved or not and should disappear from the pending/approved booking sections and get a notification when the booking was done.
+    * Test: Delete the booking as a user.
+    * Outcome: When the booking has been deleted I get the notification and it has been deleted from the database.
+
+    #### Add a Review
+
+    * Expected : The user can write a review and can upload a picture if wish, and can view it on the review page.
+    * Test: Write a review as a user and upload a picture.
+    * Outcome: When the review has been wrote I get the notification and it appeared on the review page with or without picture.
+
+    #### Edit a Review
+
+    * Expected : The user can edit a review and can upload or delete picture if wish, and get a notification when it is done.
+    * Test: Edit a review as a user and deleted a picture.
+    * Outcome: When the review has been edited I get the notification and it appeared on the review page without picture.
+
+    #### Delete a Review
+
+    * Expected : The user can delete a review.
+    * Test: Delete a review as a user.
+    * Outcome: When the review has been deleted I get the notification and it disappeard from the review page.
+    
+    #### **Testing as a SuperUser**
+
+    #### Approve Bookings
+
+    * Expected: The superuser can see all the pending bookings and able to approve it.
+    * Test: Approve the pending booking.
+    * Outcome: The pending booking has been approved and appeared in the approved booking section.
+
+    #### Edit Booking
+
+    * Expected: The superuser can see all the pending bookings and able to edit it.
+    * Test: Edit the pending booking.
+    * Outcome: The pending booking has been edited and stayed in the pending booking section.
+
+    #### Delete Booking
+
+    * Expected: The superuser is able to delete any booking made by anyone if it is been or not been approved.
+    * Test: Cancel booking in the pending and approved sections.
+    * Outcome: Both booking has been deleted from the database and the frontend.
+
+    #### Edit Review
+
+    * Expected: The superuser can edit all the reviews do not matter who wrote it.
+    * Test: Edit a review.
+    * Outcome: The review has been edited and still on the review page.
+
+    #### Delete Review
+    
+    * Expected: The superuser is able to delete any review made by anyone.
+    * Test: Delete review.
+    * Outcome: The review has been deleted from the database and the frontend.
 
  * ### _Solved bugs_:
 
-    1. Bug: When I wrote a review it has not been sent to the database.  
+    * Bug: When I wrote a review it has not been sent to the database.  
     Solution: I did the "makemigrations" command loads of times but did not actually "migrate" it. that is why the database was not connected properly.
 
-    2. Bug: I made the form to leave a review but it did not show up on the template.  
+    * Bug: I made the form to leave a review but it did not show up on the template.  
     Solution: I was using a class based formview to render the template but I have not get the context data so the form did not show up.
 
-    3. Bug: I had a problem with the edit review/booking I could not pull the data which was already been wrote in the review or been booked in a modal.  
+    * Bug: I had a problem with the edit review/booking I could not pull the data which was already been wrote in the review or been booked in a modal.  
     Solution: I had a nice session with the tutors about it and at the end Ger said the big issues was I had to make a separate html for the edit where I can bring up the review/booking with the right id.
 
-    4. Bug: When the user had to write the date for cleaning date there was no calendar just had to put in manually.  
+    * Bug: When the user had to write the date for cleaning date there was no calendar just had to put in manually.  
     Solution: Lucky for me my mentor showed me a solution with a widget in the forms and all was good.
 
-    5. Bug: I coud not upload any images to the review page on the frontend.  
+    * Bug: I coud not upload any images to the review page on the frontend.  
     Solution: As I spoke with the tutors they point me to the right direction to I have to include a tag in the form which was the following : enctype="multipart/form-data" and this tag is let me upload the image from the front end.
 
-    6. Bug: I couldn not show the validation message when the user choose a day in the past.  
+    * Bug: I couldn not show the validation message when the user choose a day in the past.  
     Solution: The issue was I redirected the site to the home page after form has been done and the user could not see any message but the easy solution wwas just render it.
 
-    7. Bug: Approve button not working.  
+    * Bug: Approve button not working.  
     Solution: Change the integerfield to boolean field and toggle instead of a form.
 
-    8. Bug: After deployment to heroku, the static files are not found.  
+    * Bug: After deployment to heroku, the static files are not found.  
     Solution: It happaned because the Debug in the settings was on True and I deployed like that, after I changed it to False everything went perfect.
 
 
@@ -182,19 +269,19 @@ I hope everybody found this website useful and easy to navigate on even if the c
 
 ## _**Deployment**_
 
-1. Create the Heroku App:
+* Create the Heroku App:
     - Select "Create new app" in Heroku.
     - Choose a name for your app and select the location.
 
-2. Connect GitHub repo:
+* Connect GitHub repo:
     - On the deploy tab you choose the deployment method GitHub
     - You type your GitHub repo name to connect with Heroku
     - Click Connect
 
-3. Attach the Postgres database:
+* Attach the Postgres database:
     - In the Resources tab, under add-ons, type in Postgres and select the Heroku Postgres option.
 
-4. Attach the ElephantSQL database (instead of Postgre on Heroku):  
+* Attach the ElephantSQL database (instead of Postgre on Heroku):  
     - Login to the ElephantSQL website
     - Create New Instance
     - Have to give a name to the plan and had to choose the Tiny Turtle plan which is free
@@ -212,7 +299,7 @@ I hope everybody found this website useful and easy to navigate on even if the c
     - The database has been changed
 
 
-5. Prepare the environment and settings.py file:
+* Prepare the environment and settings.py file:
     - In the Settings tab, click on Reveal Config Vars and copy the url next to DATABASE_URL.
     - In your GitPod workspace, create an env.py file in the main directory. 
     - Add the DATABASE_URL value and your chosen SECRET_KEY value to the env.py file.
@@ -236,12 +323,12 @@ I hope everybody found this website useful and easy to navigate on even if the c
         - Update DIRS in TEMPLATES with TEMPLATES_DIR
         - Update ALLOWED_HOSTS with ['app_name.heroku.com', 'localhost']
 
-    6. Deployment:
-        - On the Heroku website you navigate to the deploy tab
-        - You look for the Manual Deploy and choose the "main" branch
-        - Click Deploy Branch
+* Deployment:
+    - On the Heroku website you navigate to the deploy tab
+    - You look for the Manual Deploy and choose the "main" branch
+    - Click Deploy Branch
 
-    7. Live website : [The Deepest Cleaning](https://the-deepest-cleaning-vm.herokuapp.com/)
+* Live website : [The Deepest Cleaning](https://the-deepest-cleaning-vm.herokuapp.com/)
 
 
 * ## _**Credits**_
