@@ -335,6 +335,8 @@ I hope everybody found this website useful and easy to navigate on even if the c
 
     * The background I found it on the [Pexels.com](https://www.pexels.com/photo/white-wooden-cupboards-2724749/)
 
+    * The content on the deep/general cleaning page has been found on the following site: [Clean Sweep Of America](https://www.cleansweepofamerica.com/deep-cleaning-vs-regular-house-cleaning-what-youre-actually-missing/)
+
     * I would like to give credit to my mentor, the tutors helped me a lot during this project. I am really aprreciate it.
 
     * The logo was made by my wife, Roxana Mathe done it with Adobe Photoshop.
